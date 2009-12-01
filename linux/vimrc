@@ -1,0 +1,74 @@
+" Use VIM settings, rather than Vi settings
+set nocompatible
+
+" Turn on filetype based plugins
+filetype plugin on
+
+" Turn on line numbers 
+set nu
+
+"Enable syntax highlighting
+syntax on
+
+" Auotmatically indent based on file type
+filetype indent on
+set autoindent
+
+" Case insensitive search (smartcase)
+set ignorecase smartcase
+
+" Highlight search
+set hls
+
+" Wrap text instead of being on one line
+set lbr
+
+" Incremental search
+set incsearch
+
+" Remap Ctrl-N and Ctrl-P to :next and :previous, respectively
+nnoremap <C-N> :next<Enter>
+nnoremap <C-P> :previous<Enter>
+set confirm
+
+" Set indentation to spaces
+set tabstop=2
+set shiftwidth=2
+set softtabstop=4
+set expandtab
+
+
+" Set go filetype
+au BufNewFile,BufRead *.go setfiletype go
+
+if has("autocmd")
+  " Set indentation for Python according to Google Style Guide
+  autocmd Filetype python setlocal tabstop=4 | setlocal shiftwidth=4 | setlocal expandtab
+
+  " Set indentation for Ruby according to Google Style Guide
+  autocmd Filetype ruby setlocal tabstop=2|setlocal shiftwidth=2|setlocal expandtab
+
+  " Set indentation for C according to Google Style Guide
+  autocmd Filetype c setlocal tabstop=2|setlocal shiftwidth=2|setlocal expandtab
+
+  " Set indentation for C++ according to Google Style Guide
+  autocmd Filetype cpp setlocal tabstop=2|setlocal shiftwidth=2|setlocal expandtab
+
+  " Set indentention for Make files
+  autocmd Filetype make setlocal noexpandtab
+
+  " Set indentation for Go files
+  autocmd Filetype go setlocal noexpandtab | setlocal tabstop=4 | setlocal tabstop=4
+
+  " Set indentation for HTML files
+  autocmd Filetype html setlocal tabstop=2 | setlocal shiftwidth=2 | setlocal expandtab
+endif
+
+" Ignore silly files
+set wildignore=*.o,*.obj,*.bak,*.exe
+
+" Set colorscheme
+colorscheme elflord
+
+" Set font
+set gfn=Inconsolata\ 11

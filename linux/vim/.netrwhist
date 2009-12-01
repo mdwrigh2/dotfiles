@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/mdwrigh2/code/personal/Continuity/app'
+let g:netrw_dirhist_2='/home/mdwrigh2/code/personal/Continuity/app/controllers'
+let g:netrw_dirhist_3='/home/mdwrigh2/code/personal/gomemcached'
+let g:netrw_dirhist_4='/home/mdwrigh2/code/personal/gotut/.git'
