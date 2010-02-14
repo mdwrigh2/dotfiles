@@ -34,35 +34,38 @@ set confirm
 " Set indentation to spaces
 set tabstop=2
 set shiftwidth=2
-set softtabstop=4
+set softtabstop=2
 set expandtab
 
 
 " Set go filetype
 au BufNewFile,BufRead *.go setfiletype go
 
-if has("autocmd")
   " Set indentation for Python according to Google Style Guide
-  autocmd Filetype python setlocal tabstop=4 | setlocal shiftwidth=4 | setlocal expandtab
+au FileType python set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
   " Set indentation for Ruby according to Google Style Guide
-  autocmd Filetype ruby setlocal tabstop=2|setlocal shiftwidth=2|setlocal expandtab
+au Filetype ruby set tabstop=2 shiftwidth=2 expandtab
 
   " Set indentation for C according to Google Style Guide
-  autocmd Filetype c setlocal tabstop=2|setlocal shiftwidth=2|setlocal expandtab
+au Filetype c set tabstop=2 shiftwidth=2 expandtab
 
   " Set indentation for C++ according to Google Style Guide
-  autocmd Filetype cpp setlocal tabstop=2|setlocal shiftwidth=2|setlocal expandtab
+au Filetype cpp set tabstop=2 shiftwidth=2 expandtab
 
   " Set indentention for Make files
-  autocmd Filetype make setlocal noexpandtab
+au Filetype make set noexpandtab
 
   " Set indentation for Go files
-  autocmd Filetype go setlocal noexpandtab | setlocal tabstop=4 | setlocal tabstop=4
+au Filetype go setlocal noexpandtab tabstop=4 softtabstop=4
 
   " Set indentation for HTML files
-  autocmd Filetype html setlocal tabstop=2 | setlocal shiftwidth=2 | setlocal expandtab
-endif
+au Filetype html set tabstop=2 shiftwidth=2 expandtab
+au FileType xhtml set tabstop=2 shiftwidth=2 expandtab
+
+  " Set settings for LaTeX files
+au Filetype tex SPCheck
+au Filetype tex let dialect='US'
 
 " Ignore silly files
 set wildignore=*.o,*.obj,*.bak,*.exe
@@ -72,3 +75,6 @@ colorscheme elflord
 
 " Set font
 set gfn=Inconsolata\ 11
+
+" Bind NERDTree commands
+map <F2> :NERDTreeToggle<CR>
