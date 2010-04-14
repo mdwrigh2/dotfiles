@@ -71,7 +71,7 @@ au Filetype tex let dialect='US'
 set wildignore=*.o,*.obj,*.bak,*.exe
 
 " Set colorscheme
-colorscheme elflord
+colorscheme molokai
 
 " Set font
 set gfn=Inconsolata\ 11
