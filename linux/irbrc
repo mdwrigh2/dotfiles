@@ -1,4 +1,3 @@
-puts "loaded"
 # Make gems available
 require 'rubygems'
 
