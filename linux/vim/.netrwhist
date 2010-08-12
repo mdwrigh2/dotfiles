@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/mdwrigh2/code/misc/loudbot/lib/LoudBot'
-let g:netrw_dirhist_2='/home/mdwrigh2/code/research/test/testbed/db'
-let g:netrw_dirhist_3='/home/mdwrigh2/code/research/test/testbed/app/views/layouts'
-let g:netrw_dirhist_4='/home/mdwrigh2/code/personal/derefnull'
-let g:netrw_dirhist_5='/home/mdwrigh2/code/anomalous/antiparenting/app/models'
-let g:netrw_dirhist_6='/home/mdwrigh2/.rvm/rubies/ruby-1.9.2-preview3/lib/ruby/1.9.1/irb'
