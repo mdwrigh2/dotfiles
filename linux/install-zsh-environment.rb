@@ -2,7 +2,7 @@
 # this puts all of the files in the current directory into an array of strings
 # and then iterates over them
 
-Dir.home ||= ENV['HOME']
+home = ENV['HOME']
 Dir["#{Dir.pwd}/*"].each do |file|
-  system "ln -nfs #{file} #{Dir.home}/.#{file.split('/').last}" unless file.split('/').last.include?('install-zsh')
+  system "ln -nfs #{file} #{home}/.#{file.split('/').last}" unless file.split('/').last.include?('install-zsh')
 end
