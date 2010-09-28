@@ -45,6 +45,9 @@ au BufNewFile,BufRead *.go set filetype=go
 au BufNewFile,BufRead *.sjs set filetype=javascript
 " Set njs filetype
 au BufNewFile,BufRead *.njs set filetype=javascript
+" Set asm to MASM
+au BufNewFile,Bufread *.asm set filetype=masm
+au BufNewFile,Bufread *.ASM set filetype=masm
 
   " Set indentation for Python according to Google Style Guide
 au FileType python set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
