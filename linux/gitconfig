@@ -1,0 +1,12 @@
+[user]
+	name = Michael Wright
+	email = mdwrigh2@ncsu.edu
+[merge]
+	tool = vimdiff
+[core]
+	editor = vim
+	excludesfile = /home/mdwrigh2/.gitignore
+[color]
+	ui = true
+[alias]
+	lol = log --oneline --decorate --graph
