@@ -13,6 +13,8 @@ syntax on
 " Auotmatically indent based on file type
 filetype indent on
 set autoindent
+set cindent
+set smartindent
 
 " Case insensitive search (smartcase)
 set ignorecase smartcase
