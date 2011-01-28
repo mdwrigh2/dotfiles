@@ -92,6 +92,7 @@ set gfn=Inconsolata\ 10
 
 " Bind NERDTree commands
 map <F2> :NERDTreeToggle<CR>
+map <C-c> \c 
 
 
 " Setup Binary Editing Mode
