@@ -55,6 +55,9 @@ au BufNewFile,BufRead *.njs set filetype=javascript
 au BufNewFile,Bufread *.asm set filetype=masm
 au BufNewFile,Bufread *.ASM set filetype=masm
 
+" Setup the file type for EBNFs
+au BufNewFile,BufRead *.ebnf set filetype=ebnf
+
   " Set indentation for Python according to Google Style Guide
 au FileType python set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
