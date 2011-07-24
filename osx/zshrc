@@ -1,0 +1,58 @@
+# Path to your oh-my-zsh configuration.
+export ZSH=$HOME/.oh-my-zsh
+
+# Set to the name theme to load.
+# Look in ~/.oh-my-zsh/themes/
+export ZSH_THEME="clean"
+
+# Set to this to use case-sensitive completion
+# export CASE_SENSITIVE="true"
+
+# Comment this out to disable weekly auto-update checks
+# export DISABLE_AUTO_UPDATE="true"
+
+# Uncomment following line if you want to disable colors in ls
+# export DISABLE_LS_COLORS="true"
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(git rails ruby gem cap github pip)
+
+source $ZSH/oh-my-zsh.sh
+
+# Customize to your needs...
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/cuda/bin:~/android/tools:~/android/platform-tools:~/bin/arm-2010q1/bin:~/bin:~/.cabal/bin:/usr/texbin:/usr/local/Cellar/python/2.7.1/bin:~/code/google/depot_tools
+
+export NODE_PATH=/usr/local/lib/node:$NODE_PATH
+
+if [ "$COLORTERM" = "gnome-terminal" ]
+then
+  export TERM=xterm-256color
+fi
+
+
+unsetopt auto_name_dirs
+[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+
+# export PS2="%{$fg[$NCOLOR]%}%B%n%b%{$reset_color%}:%{$fg[blue]%}%B%c/%b%{$reset_color%} $ "
+function no_git {
+  export PS1="%{$fg[$NCOLOR]%}%B%n%b%{$reset_color%}:%{$fg[blue]%}%B%c/%b%{$reset_color%} $ "
+}
+
+function no_git_off {
+  source $ZSH/oh-my-zsh.sh
+}
+
+# mount the android file image
+function mountAndroid { hdiutil attach ~/android.dmg -mountpoint /Volumes/android; }
+
+
+alias gcc="gcc -std=c99 -Wall "
+alias apt-get-suggests-install="sudo apt-get -o APT::Install-Suggests=\"true\" -o APT::Install-Recommends=\"true\" install"
+alias mvimv="mvim" # I'm constantly screwing this up, no idea why. I'll save myself a couple seconds (zsh autocorrect ftw) by just aliasing it to what I mean
+
+export WORKON_HOME=$HOME/.virtualenvs
+#source /usr/local/Cellar/python/2.7.1/bin/virtualenvwrapper.sh
+
+#source /sw/bin/init.sh
+#export PATH=/usr/local/bin:$PATH

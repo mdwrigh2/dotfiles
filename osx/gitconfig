@@ -1,7 +1,12 @@
-[github]
-	user = mdwrigh2
-	token = 079810a02de06ea57c2047a70f0ddb16
-	email = mwright@futuresinc.com
 [user]
 	name = Michael Wright
 	email = mdwrigh2@ncsu.edu
+[merge]
+	tool = vimdiff
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+[color]
+	ui = true
+[alias]
+	lol = log --oneline --decorate --graph

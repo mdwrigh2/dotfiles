@@ -1,0 +1,168 @@
+" Use VIM settings, rather than Vi settings
+set nocompatible
+
+" Turn off filetype stuff to ensure everything gets reloaded properly
+filetype off
+
+" Enable Pathogen
+call pathogen#runtime_append_all_bundles() 
+
+" Turn on filetype based plugins
+filetype plugin indent on
+
+" Turn on line numbers 
+set nu
+
+"Enable syntax highlighting
+syntax on
+
+" Auotmatically indent based on file type
+filetype indent on
+set autoindent
+set cindent
+set smartindent
+
+" Case insensitive search (smartcase)
+set ignorecase smartcase
+
+" Highlight search
+set hls
+
+" Wrap text instead of being on one line
+set lbr
+
+" Turn the ruler on
+set ruler
+
+" Incremental search
+set incsearch
+
+" Remap Ctrl-N and Ctrl-P to :next and :previous, respectively
+nnoremap <C-N> :next<Enter>
+nnoremap <C-P> :previous<Enter>
+set confirm
+
+" Set indentation to spaces
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+
+" Set the text width to 100 by default
+set textwidth=100
+
+
+" Prevents Vim 7.0 from setting filetype to 'plaintex'
+let g:tex_flavor='latex'
+
+
+" Set go filetype
+au BufNewFile,BufRead *.go set filetype=go
+
+" Set sjs filetype
+au BufNewFile,BufRead *.sjs set filetype=javascript
+" Set njs filetype
+au BufNewFile,BufRead *.njs set filetype=javascript
+" Set asm to MASM
+au BufNewFile,Bufread *.asm set filetype=masm
+au BufNewFile,Bufread *.ASM set filetype=masm
+
+" Setup django templating highlighting for all html
+au BufNewFile,Bufread *.html set filetype=htmldjango
+
+" Setup the file type for EBNFs
+au BufNewFile,BufRead *.ebnf set filetype=ebnf
+
+" Set indentation for Python according to Google Style Guide
+au FileType python set tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth=80
+
+" Set indentation for Ruby according to Google Style Guide
+au Filetype ruby set tabstop=2 shiftwidth=2 expandtab
+
+" Set indentation for C according to Google Style Guide
+au Filetype c set tabstop=2 shiftwidth=2 expandtab
+
+" Set indentation for C++ according to Google Style Guide
+au Filetype cpp set tabstop=2 shiftwidth=2 expandtab
+
+" Set indentention for Make files
+au Filetype make set noexpandtab
+
+" Set indentation for Go files
+au Filetype go setlocal noexpandtab tabstop=4 softtabstop=4
+
+" Set indentation for HTML files
+au Filetype html set tabstop=2 shiftwidth=2 expandtab
+au FileType xhtml set tabstop=2 shiftwidth=2 expandtab
+
+" Set settings for LaTeX files
+au Filetype tex SPCheck
+au Filetype tex let dialect='US'
+
+" Set settings for XML files
+au Filetype xml set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+
+" Ignore silly files
+set wildignore=*.o,*.obj,*.bak,*.exe
+
+" Set colorscheme
+colorscheme molokai
+
+" Set font
+set gfn=Inconsolata:h14
+
+" Bind NERDTree commands
+map <F2> :NERDTreeToggle<CR>
+map <C-c> \c 
+
+
+" Setup Binary Editing Mode
+" autocmds to automatically enter hex mode and handle file writes properly
+if has("autocmd")
+  " vim -b : edit binary using xxd-format!
+  augroup Binary
+    au!
+
+    " set binary option for all binary files before reading them
+    au BufReadPre *.bin,*.hex setlocal binary
+
+    " if on a fresh read the buffer variable is already set, it's wrong
+    au BufReadPost *
+          \ if exists('b:editHex') && b:editHex |
+          \   let b:editHex = 0 |
+          \ endif
+
+    " convert to hex on startup for binary files automatically
+    au BufReadPost *
+          \ if &binary | Hexmode | endif
+
+    " When the text is freed, the next time the buffer is made active it will
+    " re-read the text and thus not match the correct mode, we will need to
+    " convert it again if the buffer is again loaded.
+    au BufUnload *
+          \ if getbufvar(expand("<afile>"), 'editHex') == 1 |
+          \   call setbufvar(expand("<afile>"), 'editHex', 0) |
+          \ endif
+
+    " before writing a file when editing in hex mode, convert back to non-hex
+    au BufWritePre *
+          \ if exists("b:editHex") && b:editHex && &binary |
+          \  let oldro=&ro | let &ro=0 |
+          \  let oldma=&ma | let &ma=1 |
+          \  silent exe "%!xxd -r" |
+          \  let &ma=oldma | let &ro=oldro |
+          \  unlet oldma | unlet oldro |
+          \ endif
+
+    " after writing a binary file, if we're in hex mode, restore hex mode
+    au BufWritePost *
+          \ if exists("b:editHex") && b:editHex && &binary |
+          \  let oldro=&ro | let &ro=0 |
+          \  let oldma=&ma | let &ma=1 |
+          \  silent exe "%!xxd" |
+          \  exe "set nomod" |
+          \  let &ma=oldma | let &ro=oldro |
+          \  unlet oldma | unlet oldro |
+          \ endif
+  augroup END
+endif
