@@ -1,6 +1,12 @@
 " Use VIM settings, rather than Vi settings
 set nocompatible
 
+" Turn filetype plugins off so that they'll reload with pathogen bundles
+filetype plugin off
+
+" Start all of the bundles via pathogen
+call pathogen#runtime_append_all_bundles() 
+
 " Turn on filetype based plugins
 filetype plugin on
 
@@ -58,6 +64,10 @@ au BufNewFile,Bufread *.ASM set filetype=masm
 " Setup the file type for EBNFs
 au BufNewFile,BufRead *.ebnf set filetype=ebnf
 
+" Setup the filetype for CoffeeScript
+autocmd BufNewFile,BufRead *.coffee set filetype=coffee
+autocmd BufNewFile,BufRead *Cakefile set filetype=coffee
+
   " Set indentation for Python according to Google Style Guide
 au FileType python set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
@@ -97,6 +107,15 @@ set gfn=Inconsolata\ 10
 map <F2> :NERDTreeToggle<CR>
 map <C-c> \c 
 
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
 " Setup Binary Editing Mode
 " autocmds to automatically enter hex mode and handle file writes properly
