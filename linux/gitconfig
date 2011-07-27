@@ -5,7 +5,7 @@
 	tool = vimdiff
 [core]
 	editor = vim
-	excludesfile = /home/mdwrigh2/.gitignore
+	excludesfile = ~/.gitignore
 [color]
 	ui = true
 [alias]
