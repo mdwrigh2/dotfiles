@@ -42,3 +42,4 @@ function no_git_off {
 
 alias gcc="gcc -std=c99 -Wall "
 alias apt-get-suggests-install="sudo apt-get -o APT::Install-Suggests=\"true\" -o APT::Install-Recommends=\"true\" install"
+export EDITOR=/usr/bin/vim
