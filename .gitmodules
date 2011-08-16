@@ -1,14 +1,14 @@
 # Linux submodules
 [submodule "a"]
-    path = linux/vim/bundle/a
+    path = linux/vim/bundle/a.vim
     url = https://github.com/vim-scripts/a.vim.git
 
 [submodule "c"]
-    path = linux/vim/bundle/c
+    path = linux/vim/bundle/c.vim
     url = https://github.com/vim-scripts/c.vim.git
 
 [submodule "command-t"]
-    path = linux/vim/bundle/command-t
+    path = linux/vim/bundle/Command-T
     url = https://github.com/wincent/Command-T.git
 
 [submodule "nerdcommenter"]
@@ -24,11 +24,11 @@
     url = git://github.com/robbyrussell/oh-my-zsh.git
 
 [submodule "rails"]
-    path = linux/vim/bundle/rails
+    path = linux/vim/bundle/vim-rails
     url = https://github.com/tpope/vim-rails.git
 
 [submodule "snipmate"]
-    path = linux/vim/bundle/snipmate
+    path = linux/vim/bundle/snipmate.vim
     url = https://github.com/msanders/snipmate.vim.git
 
 [submodule "vim-coffee-script"]
