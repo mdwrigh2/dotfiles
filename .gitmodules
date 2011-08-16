@@ -1,11 +1,15 @@
 # Linux submodules
-[submodule "oh-my-zsh"]
-    path = linux/oh-my-zsh
-    url = git://github.com/robbyrussell/oh-my-zsh.git
+[submodule "a"]
+    path = linux/vim/bundle/a
+    url = https://github.com/vim-scripts/a.vim.git
 
-[submodule "vim-coffee-script"]
-    path = linux/vim/bundle/vim-coffee-script
-    url = https://github.com/grayrest/vim-coffee-script.git
+[submodule "c"]
+    path = linux/vim/bundle/c
+    url = https://github.com/vim-scripts/c.vim.git
+
+[submodule "command-t"]
+    path = linux/vim/bundle/command-t
+    url = https://github.com/wincent/Command-T.git
 
 [submodule "nerdcommenter"]
     path = linux/vim/bundle/nerdcommenter
@@ -14,6 +18,22 @@
 [submodule "nerdtree"]
     path = linux/vim/bundle/nerdtree
     url = https://github.com/scrooloose/nerdtree.git
+
+[submodule "oh-my-zsh"]
+    path = linux/oh-my-zsh
+    url = git://github.com/robbyrussell/oh-my-zsh.git
+
+[submodule "rails"]
+    path = linux/vim/bundle/rails
+    url = https://github.com/tpope/vim-rails.git
+
+[submodule "snipmate"]
+    path = linux/vim/bundle/snipmate
+    url = https://github.com/msanders/snipmate.vim.git
+
+[submodule "vim-coffee-script"]
+    path = linux/vim/bundle/vim-coffee-script
+    url = https://github.com/grayrest/vim-coffee-script.git
 
 [submodule "vim-scala"]
     path = linux/vim/bundle/vim-scala
