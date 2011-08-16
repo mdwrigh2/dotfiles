@@ -56,3 +56,5 @@ export WORKON_HOME=$HOME/.virtualenvs
 
 #source /sw/bin/init.sh
 #export PATH=/usr/local/bin:$PATH
+
+ulimit -S -n 1024

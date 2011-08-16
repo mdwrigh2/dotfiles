@@ -1,9 +1,6 @@
 " Use VIM settings, rather than Vi settings
 set nocompatible
 
-" Turn off filetype stuff to ensure everything gets reloaded properly
-filetype off
-
 " Enable Pathogen
 call pathogen#runtime_append_all_bundles() 
 
@@ -17,7 +14,6 @@ set nu
 syntax on
 
 " Auotmatically indent based on file type
-filetype indent on
 set autoindent
 set cindent
 set smartindent
