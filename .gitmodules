@@ -1,7 +1,41 @@
+# Linux submodules
 [submodule "oh-my-zsh"]
-	path = linux/oh-my-zsh
-	url = git://github.com/robbyrussell/oh-my-zsh.git
+    path = linux/oh-my-zsh
+    url = git://github.com/robbyrussell/oh-my-zsh.git
 
 [submodule "vim-coffee-script"]
-  path = linux/vim/bundle/vim-coffee-script
-  url = https://github.com/grayrest/vim-coffee-script.git
+    path = linux/vim/bundle/vim-coffee-script
+    url = https://github.com/grayrest/vim-coffee-script.git
+
+[submodule "nerdcommenter"]
+    path = linux/vim/bundle/nerdcommenter
+    url = https://github.com/scrooloose/nerdcommenter.git
+
+[submodule "nerdtree"]
+    path = linux/vim/bundle/nerdtree
+    url = https://github.com/scrooloose/nerdtree.git
+
+[submodule "vim-scala"]
+    path = linux/vim/bundle/vim-scala
+    url = https://github.com/ewiplayer/vim-scala.git
+
+# OSX submodules
+[submodule "oh-my-zsh-osx"]
+    path = osx/oh-my-zsh
+    url = git://github.com/robbyrussell/oh-my-zsh.git
+
+[submodule "vim-coffee-script-osx"]
+    path = osx/vim/bundle/vim-coffee-script
+    url = https://github.com/grayrest/vim-coffee-script.git
+
+[submodule "nerdcommenter-osx"]
+    path = osx/vim/bundle/nerdcommenter
+    url = https://github.com/scrooloose/nerdcommenter.git
+
+[submodule "nerdtree-osx"]
+    path = osx/vim/bundle/nerdtree
+    url = https://github.com/scrooloose/nerdtree.git
+
+[submodule "vim-scala-osx"]
+    path = osx/vim/bundle/vim-scala
+    url = https://github.com/ewiplayer/vim-scala.git
