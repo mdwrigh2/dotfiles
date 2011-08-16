@@ -3,10 +3,6 @@
     path = linux/vim/bundle/a.vim
     url = https://github.com/vim-scripts/a.vim.git
 
-[submodule "c"]
-    path = linux/vim/bundle/c.vim
-    url = https://github.com/vim-scripts/c.vim.git
-
 [submodule "command-t"]
     path = linux/vim/bundle/Command-T
     url = https://github.com/wincent/Command-T.git
