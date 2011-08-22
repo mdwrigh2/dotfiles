@@ -32,6 +32,9 @@ set hls
 " Wrap text instead of being on one line
 set lbr
 
+" Turn the ruler on
+set ruler
+
 " Incremental search
 set incsearch
 
@@ -46,6 +49,8 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
+" Set the text width to 100 by default
+set textwidth=100
 
 " Prevents Vim 7.0 from setting filetype to 'plaintex'
 let g:tex_flavor='latex'
@@ -84,7 +89,7 @@ autocmd BufNewFile,BufRead *Cakefile set filetype=coffee
 au filetype java set tabstop=2 shiftwidth=2 softtabstop=2 expandtab tw=100
 
   " Set indentation for Python according to Google Style Guide
-au FileType python set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+au FileType python set tabstop=2 shiftwidth=2 softtabstop=2 expandtab textwidth=80
 
   " Set indentation for Ruby according to Google Style Guide
 au FileType ruby set tabstop=2 shiftwidth=2 expandtab
@@ -109,6 +114,9 @@ au FileType xhtml set tabstop=2 shiftwidth=2 expandtab
 au FileType tex SPCheck
 au FileType tex let dialect='US'
 au FileType tex set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+
+" Set settings for XML files
+au FileType xml set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
 " Ignore silly files
 set wildignore=*.o,*.obj,*.bak,*.exe
