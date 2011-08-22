@@ -51,7 +51,3 @@
 [submodule "nerdtree-osx"]
     path = osx/vim/bundle/nerdtree
     url = https://github.com/scrooloose/nerdtree.git
-
-[submodule "vim-scala-osx"]
-    path = osx/vim/bundle/vim-scala
-    url = https://github.com/ewiplayer/vim-scala.git

@@ -131,16 +131,6 @@ cnoremap <C-V> <C-R>+
 " The trailing space is necessary for toggle comments. Not a very good binding, IMHO
 map <C-x> <Leader>c 
 
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-
 " Setup Binary Editing Mode
 " autocmds to automatically enter hex mode and handle file writes properly
 if has("autocmd")
