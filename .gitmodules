@@ -31,10 +31,6 @@
     path = linux/vim/bundle/vim-coffee-script
     url = https://github.com/grayrest/vim-coffee-script.git
 
-[submodule "vim-scala"]
-    path = linux/vim/bundle/vim-scala
-    url = https://github.com/ewiplayer/vim-scala.git
-
 # OSX submodules
 [submodule "oh-my-zsh-osx"]
     path = osx/oh-my-zsh
