@@ -137,7 +137,12 @@ cnoremap <C-V> <C-R>+
 cnoremap <C-V> <C-R>+
 
 " The trailing space is necessary for toggle comments. Not a very good binding, IMHO
-map <C-x> <Leader>c 
+map <C-x> <Leader>ci
+
+" Setup command-t bindings
+noremap <Leader>o <Esc>:CommandT<CR>
+noremap <Leader>O <Esc>:CommandTFlush<CR>
+noremap <Leader>m <Esc>:CommandTBuffer<CR>
 
 " Setup Binary Editing Mode
 " autocmds to automatically enter hex mode and handle file writes properly
