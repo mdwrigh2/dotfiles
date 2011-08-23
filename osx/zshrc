@@ -30,6 +30,7 @@ then
   export TERM=xterm-256color
 fi
 
+export EDITOR=mvim
 
 unsetopt auto_name_dirs
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
