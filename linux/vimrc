@@ -62,7 +62,7 @@ let g:tex_flavor='latex'
 " Set colorscheme
 colorscheme molokai
 
-"Fix the leader to be something a litter nicer
+" Fix the leader to be something a litter nicer
 let mapleader=","
 
 " Mark trailing whitespace
