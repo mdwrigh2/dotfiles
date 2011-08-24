@@ -27,18 +27,22 @@
     path = linux/vim/bundle/snipmate.vim
     url = https://github.com/msanders/snipmate.vim.git
 
+[submodule "supertab"]
+    path = linux/vim/bundle/supertab
+    url = https://github.com/ervandew/supertab.git
+
 [submodule "vim-coffee-script"]
     path = linux/vim/bundle/vim-coffee-script
     url = https://github.com/grayrest/vim-coffee-script.git
 
 # OSX submodules
-[submodule "oh-my-zsh-osx"]
-    path = osx/oh-my-zsh
-    url = git://github.com/robbyrussell/oh-my-zsh.git
+[submodule "a-osx"]
+    path = osx/vim/bundle/a.vim
+    url = https://github.com/vim-scripts/a.vim.git
 
-[submodule "vim-coffee-script-osx"]
-    path = osx/vim/bundle/vim-coffee-script
-    url = https://github.com/grayrest/vim-coffee-script.git
+[submodule "command-t-osx"]
+    path = osx/vim/bundle/Command-T
+    url = https://github.com/wincent/Command-T.git
 
 [submodule "nerdcommenter-osx"]
     path = osx/vim/bundle/nerdcommenter
@@ -47,3 +51,23 @@
 [submodule "nerdtree-osx"]
     path = osx/vim/bundle/nerdtree
     url = https://github.com/scrooloose/nerdtree.git
+
+[submodule "oh-my-zsh-osx"]
+    path = osx/oh-my-zsh
+    url = git://github.com/robbyrussell/oh-my-zsh.git
+
+[submodule "rails-osx"]
+    path = osx/vim/bundle/vim-rails
+    url = https://github.com/tpope/vim-rails.git
+
+[submodule "snipmate-osx"]
+    path = osx/vim/bundle/snipmate.vim
+    url = https://github.com/msanders/snipmate.vim.git
+
+[submodule "supertab-osx"]
+    path = osx/vim/bundle/supertab
+    url = https://github.com/ervandew/supertab.git
+
+[submodule "vim-coffee-script-osx"]
+    path = osx/vim/bundle/vim-coffee-script
+    url = https://github.com/grayrest/vim-coffee-script.git

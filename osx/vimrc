@@ -14,9 +14,7 @@ set nu
 syntax on
 
 " Auotmatically indent based on file type
-set autoindent
-set cindent
-set smartindent
+set autoindent cindent smartindent
 
 " Case insensitive search (smartcase)
 set ignorecase smartcase
@@ -47,10 +45,14 @@ set expandtab
 " Set the text width to 100 by default
 set textwidth=100
 
+" Setup OmniComplete to be context aware
+let g:SuperTabDefaultCompletionType="context"
 
 " Prevents Vim 7.0 from setting filetype to 'plaintex'
 let g:tex_flavor='latex'
 
+" Fix the leader to be something a little nicer
+let mapleader=","
 
 " Set go filetype
 au BufNewFile,BufRead *.go set filetype=go
@@ -109,8 +111,12 @@ set gfn=Inconsolata:h14
 
 " Bind NERDTree commands
 map <F2> :NERDTreeToggle<CR>
-map <C-c> \c 
+map <C-c> \ci
 
+" Setup Command-T bindings
+noremap <Leader>o <Esc>:CommandT<CR>
+noremap <Leader>O <Esc>:CommandTFlush<CR>
+noremap <Leader>m <Esc>:CommandTBuffer<CR>
 
 " Setup Binary Editing Mode
 " autocmds to automatically enter hex mode and handle file writes properly

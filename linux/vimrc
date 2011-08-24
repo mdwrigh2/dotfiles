@@ -1,6 +1,7 @@
 " Use VIM settings, rather than Vi settings
 set nocompatible
 set hidden
+set encoding=utf-8
 
 " Turn filetype plugins off so that they'll reload with pathogen bundles
 filetype plugin off
@@ -52,13 +53,16 @@ set expandtab
 " Set the text width to 100 by default
 set textwidth=100
 
+" Force vim to use 256 colors
+set t_Co=256
+
 " Prevents Vim 7.0 from setting filetype to 'plaintex'
 let g:tex_flavor='latex'
 
 " Set colorscheme
 colorscheme molokai
 
-"Fix the leader to be something a litter nicer
+" Fix the leader to be something a litter nicer
 let mapleader=","
 
 " Mark trailing whitespace
