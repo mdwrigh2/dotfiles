@@ -44,6 +44,9 @@ nnoremap <C-N> :next<Enter>
 nnoremap <C-P> :previous<Enter>
 set confirm
 
+" Fix backspace on some machines
+set bs=2
+
 " Set indentation to spaces
 set tabstop=8
 set shiftwidth=4
