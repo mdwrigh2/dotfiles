@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/home/mdwrigh2/code/personal/ipsc2010/ipsc2010'
 let g:netrw_dirhist_2='/home/mdwrigh2/code/CSC512'
 let g:netrw_dirhist_3='/Users/mdwrigh2/code/personal/slash_dev_slash_comp/app/views/problems'
+let g:netrw_dirhist_4='/Users/mdwrigh2/code/src/snap-server-0.5.3.1/src/Snap/Http/Server'
