@@ -149,10 +149,28 @@ cnoremap <C-V> <C-R>+
 " The trailing space is necessary for toggle comments. Not a very good binding, IMHO
 map <C-x> <Leader>ci
 
+" Work better with splits
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <C-h> <C-w>h
+
+" Make j/k work as expected with wrapped lines
+map j gj
+map k gk
+
+" These don't have bindings anyways
+command Wq wq
+command WQ wq
+command W w
+command Q q
+
+
 " Setup command-t bindings
 noremap <Leader>o <Esc>:CommandT<CR>
 noremap <Leader>O <Esc>:CommandTFlush<CR>
 noremap <Leader>m <Esc>:CommandTBuffer<CR>
+let g:CommandTCancelMap='<Esc>' " Not sure why this was getting unset
 
 " Setup Binary Editing Mode
 " autocmds to automatically enter hex mode and handle file writes properly
