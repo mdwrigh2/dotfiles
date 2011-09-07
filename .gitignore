@@ -1,3 +1,7 @@
 *.swp
 *.swo
 linux/vim/.netrwhist
+*.hi
+*.o
+linux/xmonad/xmonad.errors
+linux/xmonad/xmonad-x86_64-linux
