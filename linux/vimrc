@@ -39,6 +39,9 @@ set ruler
 " Incremental search
 set incsearch
 
+" Set SuperTab to use context when completing things
+let g:SuperTabDefaultCompletionType = "context"
+
 " Remap Ctrl-N and Ctrl-P to :next and :previous, respectively
 nnoremap <C-N> :next<Enter>
 nnoremap <C-P> :previous<Enter>
