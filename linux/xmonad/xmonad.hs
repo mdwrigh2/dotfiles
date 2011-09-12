@@ -130,6 +130,13 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
  
     -- Restart xmonad
     , ((modMask              , xK_q     ), restart "xmonad" True)
+
+    -- Increase volume
+    , ((controlMask          , xK_equal      ), spawn "amixer -q set Master 10%+")
+    , ((controlMask          , xK_minus      ), spawn "amixer -q set Master 10%-")
+    , ((controlMask          , xK_KP_Add     ), spawn "amixer -q set Master 10%+")
+    , ((controlMask          , xK_KP_Subtract), spawn "amixer -q set Master 10%-")
+    , ((controlMask          , xK_KP_Multiply), spawn "amixer -q set Master toggle") 
     ]
     ++
  
