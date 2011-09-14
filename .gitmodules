@@ -3,6 +3,10 @@
     path = linux/vim/bundle/a.vim
     url = https://github.com/vim-scripts/a.vim.git
 
+[submodule "Align"]
+    path = linux/vim/bundle/Align
+    url = https://github.com/vim-scripts/Align.git
+
 [submodule "command-t"]
     path = linux/vim/bundle/Command-T
     url = https://github.com/wincent/Command-T.git
@@ -43,6 +47,10 @@
 [submodule "a-osx"]
     path = osx/vim/bundle/a.vim
     url = https://github.com/vim-scripts/a.vim.git
+
+[submodule "Align-osx"]
+    path = osx/vim/bundle/Align
+    url = https://github.com/vim-scripts/Align.git
 
 [submodule "command-t-osx"]
     path = osx/vim/bundle/Command-T
