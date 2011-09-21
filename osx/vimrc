@@ -42,9 +42,6 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 
-" Set the text width to 100 by default
-set textwidth=100
-
 " Setup OmniComplete to be context aware
 let g:SuperTabDefaultCompletionType="context"
 
@@ -72,7 +69,7 @@ au BufNewFile,Bufread *.html set filetype=htmldjango
 au BufNewFile,BufRead *.ebnf set filetype=ebnf
 
 " Set indentation for Python according to Google Style Guide
-au FileType python set tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth=80
+au FileType python set tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth=79
 
 " Set indentation for Ruby according to Google Style Guide
 au Filetype ruby set tabstop=2 shiftwidth=2 expandtab
