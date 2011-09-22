@@ -30,7 +30,7 @@ fi
 
 # Rebind capslock to escape
 if [ -f $HOME/.xmodmap ]; then
-    /usr/bin/xmodmap $HOME/.xmodmap
+    /usr/bin/xmodmap $HOME/.xmodmap 2&> /dev/null
 fi
 
 
