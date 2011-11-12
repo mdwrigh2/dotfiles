@@ -1,5 +1,5 @@
 *.pyc
-.DS_Store?
+.DS_Store
 .svn
 Thumbs.db
 .*.sw[a-z]

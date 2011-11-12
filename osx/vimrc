@@ -10,6 +10,9 @@ filetype plugin indent on
 " Turn on line numbers 
 set nu
 
+" Set visual bell rather than audible bell
+set vb
+
 "Enable syntax highlighting
 syntax on
 
@@ -71,6 +74,9 @@ au BufNewFile,BufRead *.ebnf set filetype=ebnf
 " Set indentation for Python according to Google Style Guide
 au FileType python set tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth=79
 
+" Set indentation for Haskell according to the snap style guide
+au FileType haskell set tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth=78
+
 " Set indentation for Ruby according to Google Style Guide
 au Filetype ruby set tabstop=2 shiftwidth=2 expandtab
 
@@ -84,7 +90,7 @@ au Filetype cpp set tabstop=2 shiftwidth=2 expandtab
 au Filetype make set noexpandtab
 
 " Set indentation for Go files
-au Filetype go setlocal noexpandtab tabstop=4 softtabstop=4
+au Filetype go setlocal noexpandtab tabstop=4 softtabstop=4 shiftwidth=4
 
 " Set indentation for HTML files
 au Filetype html set tabstop=2 shiftwidth=2 expandtab
