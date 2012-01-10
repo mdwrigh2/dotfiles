@@ -1,6 +1,7 @@
 *.swp
 *.swo
 linux/vim/.netrwhist
+osx/vim/.netrwhist
 *.hi
 *.o
 linux/xmonad/xmonad.errors
