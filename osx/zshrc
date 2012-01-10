@@ -23,6 +23,12 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=/usr/local/share/python:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/cuda/bin:~/android/tools:~/android/platform-tools:~/bin/arm-2010q1/bin:~/bin:~/.cabal/bin:/usr/texbin:/usr/local/Cellar/python/2.7.1/bin:~/code/google/depot_tools
 
+export PLAN9=/usr/local/plan9
+export PATH=~/go/bin:$PATH:$PLAN9/bin
+
+export GOROOT=$HOME/go
+export GOPATH=$GOROOT
+
 export NODE_PATH=/usr/local/lib/node:$NODE_PATH
 
 if [ "$COLORTERM" = "gnome-terminal" ]
@@ -59,3 +65,4 @@ export WORKON_HOME=$HOME/.virtualenvs
 #export PATH=/usr/local/bin:$PATH
 
 ulimit -S -n 1024
+unalias gb
