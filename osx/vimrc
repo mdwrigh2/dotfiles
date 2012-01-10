@@ -1,11 +1,35 @@
-" Use VIM settings, rather than Vi settings
-set nocompatible
-
 " Enable Pathogen
+filetype off
 call pathogen#runtime_append_all_bundles() 
 
 " Turn on filetype based plugins
 filetype plugin indent on
+
+" Use VIM settings, rather than Vi settings
+set nocompatible
+
+set encoding=utf-8
+
+set ttyfast
+
+set history=1000
+
+" Persistent undos
+set undofile 
+set undoreload=10000
+
+" Keep temporary files and backup files in one dir rather than cluttering
+" source dirs.
+set backup
+set backupdir=~/.vim/backup
+set directory=~/.vim/tmp
+
+" Keep at least 5 lines around whever I'm scrolling
+"set scrolloff=5
+"set sidescrolloff=5
+
+" Make backspace work on everything, everywhere
+set backspace=indent,eol,start
 
 " Turn on line numbers 
 set nu
@@ -13,11 +37,14 @@ set nu
 " Set visual bell rather than audible bell
 set vb
 
+" Have ctags look all the way up to root for a tags file
+set tags=tags;/
+
 "Enable syntax highlighting
 syntax on
 
 " Auotmatically indent based on file type
-set autoindent cindent smartindent
+set autoindent
 
 " Case insensitive search (smartcase)
 set ignorecase smartcase
@@ -34,16 +61,77 @@ set ruler
 " Incremental search
 set incsearch
 
+" show commands as you're typing them
+set showcmd
+
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+" Text expansion macros
+iabbrev ldis ಠ_ಠ
+
+" Fix the leader to be something a little nicer
+let mapleader=","
+
+" Make it easier to clear search results
+noremap <leader><space> :noh<cr>:call clearmatches()<cr>
+
+" Make it easier to move around
+noremap H ^
+noremap L g_
+
+" Set space to toggle folds
+nnoremap <Space> za
+vnoremap <Space> za
+
 " Remap Ctrl-N and Ctrl-P to :next and :previous, respectively
 nnoremap <C-N> :next<Enter>
 nnoremap <C-P> :previous<Enter>
 set confirm
 
+" Have searches center the line the word is found on
+map N Nzz
+map n nzz
+
+" Make block stay highlighted when changing indentation
+vnoremap > >gv
+vnoremap < <gv
+
+" Bind NERDTree commands
+map <F2> :NERDTreeToggle<CR>
+map <C-c> \ci
+
+" Setup Command-T bindings
+noremap <Leader>o <Esc>:CommandT<CR>
+noremap <Leader>O <Esc>:CommandTFlush<CR>
+noremap <Leader>m <Esc>:CommandTBuffer<CR>
+
+" Fugitive bindings
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gw :Gwrite<cr>
+nnoremap <leader>ga :Gadd<cr>
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gco :Gcheckout<cr>
+nnoremap <leader>gci :Gcommit<cr>
+nnoremap <leader>gm :Gmove<cr>
+nnoremap <leader>gr :Gremove<cr>
+nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
+
+augroup ft_fugitive
+    au!
+
+    au BufNewFile,BufRead .git/index setlocal nolist
+augroup END
+
+" Built-in LISP settings
+let g:lisp_rainbow = 1
+
 " Set indentation to spaces
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
-set expandtab
+set smarttab expandtab
 
 " Setup OmniComplete to be context aware
 let g:SuperTabDefaultCompletionType="context"
@@ -51,8 +139,21 @@ let g:SuperTabDefaultCompletionType="context"
 " Prevents Vim 7.0 from setting filetype to 'plaintex'
 let g:tex_flavor='latex'
 
-" Fix the leader to be something a little nicer
-let mapleader=","
+
+" Ignore silly files
+set wildignore=*.o,*.obj,*.bak,*.exe
+
+" Set colorscheme
+colorscheme molokai
+set background=dark
+
+" Set font
+set gfn=Inconsolata:h14
+
+" Remove the toolbar if it's macvim or gvim
+if has("gui_running")
+  set guioptions-=T
+endif
 
 " Set go filetype
 au BufNewFile,BufRead *.go set filetype=go
@@ -103,23 +204,6 @@ au Filetype tex let dialect='US'
 " Set settings for XML files
 au Filetype xml set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
-" Ignore silly files
-set wildignore=*.o,*.obj,*.bak,*.exe
-
-" Set colorscheme
-colorscheme molokai
-
-" Set font
-set gfn=Inconsolata:h14
-
-" Bind NERDTree commands
-map <F2> :NERDTreeToggle<CR>
-map <C-c> \ci
-
-" Setup Command-T bindings
-noremap <Leader>o <Esc>:CommandT<CR>
-noremap <Leader>O <Esc>:CommandTFlush<CR>
-noremap <Leader>m <Esc>:CommandTBuffer<CR>
 
 " Setup Binary Editing Mode
 " autocmds to automatically enter hex mode and handle file writes properly
@@ -171,3 +255,120 @@ if has("autocmd")
           \ endif
   augroup END
 endif
+
+
+" Who doesn't live Nyan cat?
+function! NyanMe() " {{{
+    hi NyanFur             guifg=#BBBBBB
+    hi NyanPoptartEdge     guifg=#ffd0ac
+    hi NyanPoptartFrosting guifg=#fd3699 guibg=#fe98ff
+    hi NyanRainbow1        guifg=#6831f8
+    hi NyanRainbow2        guifg=#0099fc
+    hi NyanRainbow3        guifg=#3cfa04
+    hi NyanRainbow4        guifg=#fdfe00
+    hi NyanRainbow5        guifg=#fc9d00
+    hi NyanRainbow6        guifg=#fe0000
+
+
+    echohl NyanRainbow1
+    echon "≈"
+    echohl NyanRainbow2
+    echon "≋"
+    echohl NyanRainbow3
+    echon "≈"
+    echohl NyanRainbow4
+    echon "≋"
+    echohl NyanRainbow5
+    echon "≈"
+    echohl NyanRainbow6
+    echon "≋"
+    echohl NyanRainbow1
+    echon "≈"
+    echohl NyanRainbow2
+    echon "≋"
+    echohl NyanRainbow3
+    echon "≈"
+    echohl NyanRainbow4
+    echon "≋"
+    echohl NyanRainbow5
+    echon "≈"
+    echohl NyanRainbow6
+    echon "≋"
+    echohl None
+    echo ""
+
+    echohl NyanRainbow1
+    echon "≈"
+    echohl NyanRainbow2
+    echon "≋"
+    echohl NyanRainbow3
+    echon "≈"
+    echohl NyanRainbow4
+    echon "≋"
+    echohl NyanRainbow5
+    echon "≈"
+    echohl NyanRainbow6
+    echon "≋"
+    echohl NyanRainbow1
+    echon "≈"
+    echohl NyanRainbow2
+    echon "≋"
+    echohl NyanRainbow3
+    echon "≈"
+    echohl NyanRainbow4
+    echon "≋"
+    echohl NyanRainbow5
+    echon "≈"
+    echohl NyanRainbow6
+    echon "≋"
+    echohl NyanFur
+    echon "╰"
+    echohl NyanPoptartEdge
+    echon "⟨"
+    echohl NyanPoptartFrosting
+    echon "⣮⣯⡿"
+    echohl NyanPoptartEdge
+    echon "⟩"
+    echohl NyanFur
+    echon "⩾^ω^⩽"
+    echohl None
+    echo ""
+
+    echohl NyanRainbow1
+    echon "≈"
+    echohl NyanRainbow2
+    echon "≋"
+    echohl NyanRainbow3
+    echon "≈"
+    echohl NyanRainbow4
+    echon "≋"
+    echohl NyanRainbow5
+    echon "≈"
+    echohl NyanRainbow6
+    echon "≋"
+    echohl NyanRainbow1
+    echon "≈"
+    echohl NyanRainbow2
+    echon "≋"
+    echohl NyanRainbow3
+    echon "≈"
+    echohl NyanRainbow4
+    echon "≋"
+    echohl NyanRainbow5
+    echon "≈"
+    echohl NyanRainbow6
+    echon "≋"
+    echohl None
+    echon " "
+    echohl NyanFur
+    echon "”   ‟"
+    echohl None
+
+    sleep 1
+    redraw
+    echo " "
+    echo " "
+    echo "Noms?"
+    redraw
+endfunction " }}}
+command! NyanMe call NyanMe()
