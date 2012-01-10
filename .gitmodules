@@ -43,6 +43,10 @@
     path = linux/vim/bundle/vim-coffee-script
     url = https://github.com/grayrest/vim-coffee-script.git
 
+[submodule "vim-hoogle"]
+    path = linux/vim/bundle/vim-hoogle
+    url = https://github.com/Twinside/vim-hoogle.git
+
 # OSX submodules
 [submodule "a-osx"]
     path = osx/vim/bundle/a.vim
@@ -87,3 +91,7 @@
 [submodule "vim-coffee-script-osx"]
     path = osx/vim/bundle/vim-coffee-script
     url = https://github.com/grayrest/vim-coffee-script.git
+
+[submodule "vim-hoogle-osx"]
+    path = osx/vim/bundle/vim-hoogle
+    url = https://github.com/Twinside/vim-hoogle.git
