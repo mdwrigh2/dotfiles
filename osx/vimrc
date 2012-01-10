@@ -76,6 +76,8 @@ let mapleader=","
 " Make it easier to clear search results
 noremap <leader><space> :noh<cr>:call clearmatches()<cr>
 
+
+
 " Make it easier to move around
 noremap H ^
 noremap L g_
@@ -100,6 +102,22 @@ vnoremap < <gv
 " Bind NERDTree commands
 map <F2> :NERDTreeToggle<CR>
 map <C-c> \ci
+
+" Work better with splits
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+map <C-h> <C-w>h
+
+" Make j/k work as expected with wrapped lines
+map j gj
+map k gk
+
+" These don't have bindings anyways
+command Wq wq
+command WQ wq
+command W w
+command Q q
 
 " Setup Command-T bindings
 noremap <Leader>o <Esc>:CommandT<CR>
@@ -147,8 +165,20 @@ set wildignore=*.o,*.obj,*.bak,*.exe
 colorscheme molokai
 set background=dark
 
+" Force vim to use 256 colors
+set t_Co=256
+
 " Set font
 set gfn=Inconsolata:h14
+
+" Mark trailing whitespace
+set listchars=tab:\ \ ,trail:\ ,extends:»,precedes:«
+if &background == "dark"
+  highlight SpecialKey ctermbg=Red guibg=Red
+else
+  highlight SpecialKey ctermbg=Yellow guibg=Yellow
+end
+
 
 " Remove the toolbar if it's macvim or gvim
 if has("gui_running")
