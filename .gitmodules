@@ -39,6 +39,10 @@
     path = linux/vim/bundle/supertab
     url = https://github.com/ervandew/supertab.git
 
+[submodule "syntastic"]
+    path = linux/vim/bundle/syntastic
+    url = https://github.com/scrooloose/syntastic.git
+
 [submodule "vim-coffee-script"]
     path = linux/vim/bundle/vim-coffee-script
     url = https://github.com/grayrest/vim-coffee-script.git
@@ -87,6 +91,10 @@
 [submodule "supertab-osx"]
     path = osx/vim/bundle/supertab
     url = https://github.com/ervandew/supertab.git
+
+[submodule "syntastic-osx"]
+    path = osx/vim/bundle/syntastic
+    url = https://github.com/scrooloose/syntastic.git
 
 [submodule "vim-coffee-script-osx"]
     path = osx/vim/bundle/vim-coffee-script
