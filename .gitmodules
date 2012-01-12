@@ -45,7 +45,7 @@
 
 [submodule "vim-coffee-script"]
     path = linux/vim/bundle/vim-coffee-script
-    url = https://github.com/grayrest/vim-coffee-script.git
+    url = https://github.com/kchmck/vim-coffee-script.git
 
 [submodule "vim-hoogle"]
     path = linux/vim/bundle/vim-hoogle
