@@ -103,3 +103,6 @@
 [submodule "vim-hoogle-osx"]
     path = osx/vim/bundle/vim-hoogle
     url = https://github.com/Twinside/vim-hoogle.git
+[submodule "osx/vim/bundle/syntastic"]
+	path = osx/vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
