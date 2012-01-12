@@ -58,6 +58,8 @@ alias gcc="gcc -std=c99 -Wall "
 alias apt-get-suggests-install="sudo apt-get -o APT::Install-Suggests=\"true\" -o APT::Install-Recommends=\"true\" install"
 alias mvimv="mvim" # I'm constantly screwing this up, no idea why. I'll save myself a couple seconds (zsh autocorrect ftw) by just aliasing it to what I mean
 
+alias vim="mvim -v" # Use macvim rather than normal vim in the terminal
+
 export WORKON_HOME=$HOME/.virtualenvs
 #source /usr/local/Cellar/python/2.7.1/bin/virtualenvwrapper.sh
 
