@@ -56,6 +56,10 @@
     path = osx/vim/bundle/a.vim
     url = https://github.com/vim-scripts/a.vim.git
 
+[submodule "alex-osx"]
+	path = osx/vim/bundle/alex
+	url = https://github.com/vim-scripts/alex.vim.git
+
 [submodule "Align-osx"]
     path = osx/vim/bundle/Align
     url = https://github.com/vim-scripts/Align.git
