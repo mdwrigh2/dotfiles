@@ -1,11 +1,10 @@
-# OSX submodules
 [submodule "a"]
     path = vim/bundle/a.vim
     url = https://github.com/vim-scripts/a.vim.git
 
 [submodule "alex"]
-	path = vim/bundle/alex
-	url = https://github.com/vim-scripts/alex.vim.git
+    path = vim/bundle/alex
+    url = https://github.com/vim-scripts/alex.vim.git
 
 [submodule "Align"]
     path = vim/bundle/Align
