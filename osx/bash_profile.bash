@@ -1,6 +1,6 @@
-    if [ -f /opt/local/etc/bash_completion ]; then
-        . /opt/local/etc/bash_completion
-    fi
+if [ -f /opt/local/etc/bash_completion ]; then
+    . /opt/local/etc/bash_completion
+fi
 
 #source ~/.git-completion.bash
 source ~/.bashrc

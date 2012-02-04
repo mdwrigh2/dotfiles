@@ -16,12 +16,53 @@ export ZSH_THEME="clean"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git rails ruby gem cap github pip)
+
+plugins=(git rails3 ruby rvm gem pip brew lol node npm)
+if [[ -e /etc/zsh_command_not_found ]]; then
+  # I think this only exists in ubuntu, but in case anyone else has it
+  plugins+=(command-not-found)
+fi
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/local/share/python:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/cuda/bin:~/android/tools:~/android/platform-tools:~/bin/arm-2010q1/bin:~/bin:~/.cabal/bin:/usr/texbin:/usr/local/Cellar/python/2.7.1/bin:~/code/google/depot_tools
+
+os=$(uname)
+
+if [ $os = "Darwin" ]; then
+
+  export PATH=~/.cabal/bin:/usr/local/share/python:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/cuda/bin:~/android/tools:~/android/platform-tools:~/bin/arm-2010q1/bin:~/bin:/usr/texbin:/usr/local/Cellar/python/2.7.1/bin:~/code/google/depot_tools
+
+  export EDITOR=mvim
+
+  alias mvimv="mvim" # I'm constantly screwing this up, no idea why. I'll save myself a couple seconds (zsh autocorrect ftw) by just aliasing it to what I mean
+
+  alias vim="mvim -v" # Use macvim rather than normal vim in the terminal
+
+  function mountAndroid { hdiutil attach ~/android.dmg -mountpoint /Volumes/android; }
+  ulimit -S -n 1024
+
+
+elif [ $os = "Linux" ]; then
+
+  export PATH=/opt/scala-2.8.1.final/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/cuda/bin:~/android/tools:~/android/platform-tools:~/bin/arm-2010q1/bin:~/bin:~/.cabal/bin
+
+  alias apt-get-suggests-install="sudo apt-get -o APT::Install-Suggests=\"true\" -o APT::Install-Recommends=\"true\" install"
+
+  # Rebind capslock to escape
+  if [ -f $HOME/.xmodmap ]; then
+      /usr/bin/xmodmap $HOME/.xmodmap 2&> /dev/null
+  fi
+
+  export EDITOR=vim
+
+else
+  # Probably BSD or windows
+  echo "Warning: Didn't recognize OS"
+fi
+
+
+alias tmux="tmux -2 -u "
 
 export PLAN9=/usr/local/plan9
 export PATH=~/go/bin:$PATH:$PLAN9/bin
@@ -36,9 +77,9 @@ then
   export TERM=xterm-256color
 fi
 
-export EDITOR=mvim
 
 unsetopt auto_name_dirs
+
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 # export PS2="%{$fg[$NCOLOR]%}%B%n%b%{$reset_color%}:%{$fg[blue]%}%B%c/%b%{$reset_color%} $ "
@@ -50,21 +91,9 @@ function no_git_off {
   source $ZSH/oh-my-zsh.sh
 }
 
-# mount the android file image
-function mountAndroid { hdiutil attach ~/android.dmg -mountpoint /Volumes/android; }
-
 
 alias gcc="gcc -std=c99 -Wall "
-alias apt-get-suggests-install="sudo apt-get -o APT::Install-Suggests=\"true\" -o APT::Install-Recommends=\"true\" install"
-alias mvimv="mvim" # I'm constantly screwing this up, no idea why. I'll save myself a couple seconds (zsh autocorrect ftw) by just aliasing it to what I mean
-
-alias vim="mvim -v" # Use macvim rather than normal vim in the terminal
 
 export WORKON_HOME=$HOME/.virtualenvs
-#source /usr/local/Cellar/python/2.7.1/bin/virtualenvwrapper.sh
 
-#source /sw/bin/init.sh
-#export PATH=/usr/local/bin:$PATH
-
-ulimit -S -n 1024
 unalias gb

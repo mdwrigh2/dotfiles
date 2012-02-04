@@ -104,7 +104,7 @@ vnoremap < <gv
 
 " Bind NERDTree commands
 map <F2> :NERDTreeToggle<CR>
-map <C-c> \ci
+map <C-c> <Leader>ci 
 
 " Work better with splits
 map <C-j> <C-w>j
@@ -122,10 +122,36 @@ command WQ wq
 command W w
 command Q q
 
+if has("unix")
+  let s:uname = system("echo -n $(uname)")
+  if s:uname == "Darwin"
+    " Mac specific bindings
+
+    " Set font
+    set gfn=Inconsolata:h14
+
+  else
+    " Linux specific bindings
+
+    " Set font
+    set gfn=Inconsolata\ 12
+
+    "Bind copy and paste to Ctrl-Shift-C/V
+    vnoremap <C-C> "+y
+    nnoremap <C-C> "+yy
+    noremap <C-V> "+p
+    imap <C-V> <Esc><C-V>a
+    cnoremap <C-V> <C-R>+
+    cnoremap <C-V> <C-R>+
+
+  endif
+endif
+
 " Setup Command-T bindings
 noremap <Leader>o <Esc>:CommandT<CR>
 noremap <Leader>O <Esc>:CommandTFlush<CR>
 noremap <Leader>m <Esc>:CommandTBuffer<CR>
+let g:CommandTCancelMap='<Esc>' " Not sure why this was getting unset
 
 " Fugitive bindings
 nnoremap <leader>gd :Gdiff<cr>
@@ -138,6 +164,8 @@ nnoremap <leader>gci :Gcommit<cr>
 nnoremap <leader>gm :Gmove<cr>
 nnoremap <leader>gr :Gremove<cr>
 nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
+
+vnoremap <leader>t :Tabularize /
 
 " Set Powerline to use unicode rather than compatible
 let g:Powerline_symbols="unicode"
@@ -161,6 +189,9 @@ set shiftwidth=2
 set softtabstop=2
 set smarttab expandtab
 
+" Have it keep changes to open buffers without saving to the files
+set hidden
+
 " Setup OmniComplete to be context aware
 let g:SuperTabDefaultCompletionType="context"
 
@@ -169,7 +200,7 @@ let g:tex_flavor='latex'
 
 
 " Ignore silly files
-set wildignore=*.o,*.obj,*.bak,*.exe
+set wildignore=*.o,*.obj,*.bak,*.exe,*.hi,*.6
 
 " Set colorscheme
 colorscheme molokai
@@ -178,8 +209,6 @@ set background=dark
 " Force vim to use 256 colors
 set t_Co=256
 
-" Set font
-set gfn=Inconsolata:h14
 
 " Mark trailing whitespace
 set listchars=tab:\ \ ,trail:\ ,extends:»,precedes:«
@@ -198,6 +227,16 @@ endif
 " Set go filetype
 au BufNewFile,BufRead *.go set filetype=go
 
+" Set .y filetype to happy
+"   This may need to be changed back if I need to write something with yacc
+au BufNewFile,BufRead *.y set filetype=happy
+
+" Setup custom notes filetype
+au BufNewFile,BufRead *.notes nnoremap <leader>s :SPCheck<CR>
+
+" Set alex filetype
+au BufNewFile,BufRead *.x set filetype=alex
+
 " Set sjs filetype
 au BufNewFile,BufRead *.sjs set filetype=javascript
 " Set njs filetype
@@ -211,6 +250,9 @@ au BufNewFile,Bufread *.html set filetype=htmldjango
 
 " Setup the file type for EBNFs
 au BufNewFile,BufRead *.ebnf set filetype=ebnf
+
+" Setup the filetype for markdown
+au BufNewFile,BufRead *.md set filetype=markdown
 
 " Set indentation for Python according to Google Style Guide
 au FileType python set tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth=79
