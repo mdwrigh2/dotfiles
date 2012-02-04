@@ -100,6 +100,10 @@
     path = osx/vim/bundle/syntastic
     url = https://github.com/scrooloose/syntastic.git
 
+[submodule "tabular-osx"]
+	path = osx/vim/bundle/tabular
+	url = https://github.com/godlygeek/tabular.git
+
 [submodule "vim-coffee-script-osx"]
     path = osx/vim/bundle/vim-coffee-script
     url = https://github.com/kchmck/vim-coffee-script.git
