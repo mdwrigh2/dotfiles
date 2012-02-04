@@ -1,0 +1,64 @@
+# OSX submodules
+[submodule "a-osx"]
+    path = osx/vim/bundle/a.vim
+    url = https://github.com/vim-scripts/a.vim.git
+
+[submodule "alex-osx"]
+	path = osx/vim/bundle/alex
+	url = https://github.com/vim-scripts/alex.vim.git
+
+[submodule "Align-osx"]
+    path = osx/vim/bundle/Align
+    url = https://github.com/vim-scripts/Align.git
+
+[submodule "command-t-osx"]
+    path = osx/vim/bundle/Command-T
+    url = https://github.com/wincent/Command-T.git
+
+[submodule "nerdcommenter-osx"]
+    path = osx/vim/bundle/nerdcommenter
+    url = https://github.com/scrooloose/nerdcommenter.git
+
+[submodule "nerdtree-osx"]
+    path = osx/vim/bundle/nerdtree
+    url = https://github.com/scrooloose/nerdtree.git
+
+[submodule "oh-my-zsh-osx"]
+    path = osx/oh-my-zsh
+    url = git://github.com/robbyrussell/oh-my-zsh.git
+
+[submodule "pyflakes-vim-osx"]
+    path = osx/vim/bundle/pyflakes-vim
+    url = https://github.com/kevinw/pyflakes-vim.git
+
+[submodule "rails-osx"]
+    path = osx/vim/bundle/vim-rails
+    url = https://github.com/tpope/vim-rails.git
+
+[submodule "snipmate-osx"]
+    path = osx/vim/bundle/snipmate.vim
+    url = https://github.com/msanders/snipmate.vim.git
+
+[submodule "supertab-osx"]
+    path = osx/vim/bundle/supertab
+    url = https://github.com/ervandew/supertab.git
+
+[submodule "syntastic-osx"]
+    path = osx/vim/bundle/syntastic
+    url = https://github.com/scrooloose/syntastic.git
+
+[submodule "tabular-osx"]
+	path = osx/vim/bundle/tabular
+	url = https://github.com/godlygeek/tabular.git
+
+[submodule "vim-coffee-script-osx"]
+    path = osx/vim/bundle/vim-coffee-script
+    url = https://github.com/kchmck/vim-coffee-script.git
+
+[submodule "vim-hoogle-osx"]
+    path = osx/vim/bundle/vim-hoogle
+    url = https://github.com/Twinside/vim-hoogle.git
+
+[submodule "vim-powerline-osx"]
+	path = osx/vim/bundle/vim-powerline
+	url = https://github.com/Lokaltog/vim-powerline.git
