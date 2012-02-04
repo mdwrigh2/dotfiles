@@ -1,8 +1,9 @@
+vim/backup/*
 *.swp
 *.swo
-linux/vim/.netrwhist
-osx/vim/.netrwhist
+vim/.netrwhist
+vim/.netrwhist
 *.hi
 *.o
-linux/xmonad/xmonad.errors
-linux/xmonad/xmonad-x86_64-linux
+xmonad/xmonad.errors
+xmonad/xmonad-x86_64-linux
