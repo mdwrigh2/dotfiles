@@ -26,10 +26,6 @@
     path = oh-my-zsh
     url = git://github.com/robbyrussell/oh-my-zsh.git
 
-[submodule "pyflakes-vim"]
-    path = vim/bundle/pyflakes-vim
-    url = https://github.com/kevinw/pyflakes-vim.git
-
 [submodule "rails"]
     path = vim/bundle/vim-rails
     url = https://github.com/tpope/vim-rails.git
