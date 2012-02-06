@@ -246,7 +246,7 @@ au BufNewFile,Bufread *.asm set filetype=masm
 au BufNewFile,Bufread *.ASM set filetype=masm
 
 " Setup django templating highlighting for all html
-au BufNewFile,Bufread *.html set filetype=htmldjango
+au BufNewFile,Bufread *.html set filetype=htmldjango tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 " Setup the file type for EBNFs
 au BufNewFile,BufRead *.ebnf set filetype=ebnf
