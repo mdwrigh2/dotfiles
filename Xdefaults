@@ -1,12 +1,12 @@
-Xft.antialias: false
+Xft.antialias: true
 Xft.dpi:       92
 Xft.autohint:  false
 Xft.hinting:   false
 Xft.lcdfilter: lcdlegacy
 Xft.rgba:      rgb
 
-urxvt.font:             xft:Inconsolata-11:antialias=true
-urxvt.boldfont:         xft:Inconsolata-11:bold:antialias=true
+urxvt.font:             xft:Inconsolata-11:antialias=false
+urxvt.boldfont:         xft:Inconsolata-11:bold:antialias=false
 urxvt.termName:         rxvt-unicode-256color
 urxvt.imLocale:         en_US.utf8
 !urxvt.depth:            32
