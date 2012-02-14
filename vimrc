@@ -203,8 +203,8 @@ let g:tex_flavor='latex'
 set wildignore=*.o,*.obj,*.bak,*.exe,*.hi,*.6
 
 " Set colorscheme
-colorscheme molokai
 set background=dark
+colorscheme molokai
 
 " Force vim to use 256 colors
 set t_Co=256

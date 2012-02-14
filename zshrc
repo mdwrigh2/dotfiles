@@ -55,6 +55,7 @@ elif [ $os = "Linux" ]; then
   fi
 
   export EDITOR=vim
+  alias sudo="sudo -E" # have sudo retain my environment
 
 else
   # Probably BSD or windows

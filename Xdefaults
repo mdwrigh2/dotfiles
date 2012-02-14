@@ -1,0 +1,49 @@
+Xft.antialias: false
+Xft.dpi:       92
+Xft.autohint:  false
+Xft.hinting:   false
+Xft.lcdfilter: lcdlegacy
+Xft.rgba:      rgb
+
+urxvt.font:             xft:Inconsolata-11:antialias=true
+urxvt.boldfont:         xft:Inconsolata-11:bold:antialias=true
+urxvt.termName:         rxvt-unicode-256color
+urxvt.imLocale:         en_US.utf8
+!urxvt.depth:            32
+urxvt.inheritPixmap:    false
+urxvt.saveLines:        32767
+urxvt.scrollTtyKeypress:true
+urxvt.scrollWithBuffer: false
+urxvt.scrollTtyOutput:  false
+urxvt.scrollBar:        false
+urxvt.loginShell:       true
+
+! terminal colors
+*foreground:#f8f8f2
+*background:#080808
+
+! urxvt colors
+!black
+*color0:    #000000
+*color8:    #373737
+!red
+*color1:    #BB0000
+*color9:    #FF5555
+!green
+*color2:    #3CC600
+*color10:   #55FF55
+!yellow
+*color3:    #FFF615
+*color11:   #FFFD03
+!blue
+*color4:    #1142DF
+*color12:   #0B8BFF
+!magenta
+*color5:    #BB00BB
+*color13:   #FF55FF
+!cyan
+*color6:    #00D9DF
+*color14:   #55FFFF
+!white
+*color7:    #FFFFFF
+*color15:   #FFFFFF
