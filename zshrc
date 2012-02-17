@@ -68,8 +68,8 @@ alias tmux="tmux -2 -u "
 export PLAN9=/usr/local/plan9
 export PATH=~/go/bin:$PATH:$PLAN9/bin
 
-export GOROOT=$HOME/go
-export GOPATH=$GOROOT
+export GOROOT=$HOME/code/go
+export GOPATH=$HOME/go
 
 export NODE_PATH=/usr/local/lib/node:$NODE_PATH
 
