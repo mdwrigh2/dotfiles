@@ -1,6 +1,6 @@
 " Enable Pathogen
 filetype off
-call pathogen#runtime_append_all_bundles() 
+call pathogen#runtime_append_all_bundles()
 
 " Turn on filetype based plugins
 filetype plugin indent on
@@ -18,7 +18,7 @@ set ttyfast
 set history=1000
 
 " Persistent undos
-set undofile 
+set undofile
 set undoreload=10000
 
 " Keep temporary files and backup files in one dir rather than cluttering
@@ -213,10 +213,15 @@ set t_Co=256
 " Mark trailing whitespace
 set listchars=tab:\ \ ,trail:\ ,extends:»,precedes:«
 if &background == "dark"
-  highlight SpecialKey ctermbg=Red guibg=Red
+  highlight ExtraWhitespace ctermbg=Red guibg=Red
 else
-  highlight SpecialKey ctermbg=Yellow guibg=Yellow
+  highlight ExtraWhitespace ctermbg=Yellow guibg=Yellow
 end
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 
 
 " Remove the toolbar if it's macvim or gvim
