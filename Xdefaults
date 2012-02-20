@@ -7,7 +7,7 @@ Xft.rgba:      rgb
 
 urxvt.font:             xft:Inconsolata-11:antialias=false
 urxvt.boldfont:         xft:Inconsolata-11:bold:antialias=false
-urxvt.termName:         rxvt-unicode-256color
+urxvt.termName:         rxvt
 urxvt.imLocale:         en_US.utf8
 !urxvt.depth:            32
 urxvt.inheritPixmap:    false
@@ -17,6 +17,11 @@ urxvt.scrollWithBuffer: false
 urxvt.scrollTtyOutput:  false
 urxvt.scrollBar:        false
 urxvt.loginShell:       true
+
+urxvt.perl-ext-common:  default,clipboard
+urxvt.iso14755:         false
+URxvt.keysym.M-v:       perl:clipboard:paste
+URxvt.keysym.M-c:       perl:clipboard:copy
 
 ! terminal colors
 *foreground:#f8f8f2
