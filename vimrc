@@ -18,8 +18,10 @@ set ttyfast
 set history=1000
 
 " Persistent undos
-set undofile
-set undoreload=10000
+if v:version >= 730
+  set undofile
+  set undoreload=10000
+endif
 
 " Keep temporary files and backup files in one dir rather than cluttering
 " source dirs.

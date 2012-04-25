@@ -57,6 +57,8 @@ elif [ $os = "Linux" ]; then
   export EDITOR=vim
   alias sudo="sudo -E" # have sudo retain my environment
 
+  export LANG=en_US.utf8
+
 else
   # Probably BSD or windows
   echo "Warning: Didn't recognize OS"
