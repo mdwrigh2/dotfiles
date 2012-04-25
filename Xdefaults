@@ -21,6 +21,9 @@ urxvt.loginShell:       true
 urxvt.perl-ext-common:  default,clipboard
 urxvt.iso14755:         false
 
+URxvt.keysym.M-c:   perl:clipboard:copy
+URxvt.keysym.M-v:   perl:clipboard:paste
+
 ! terminal colors
 *foreground:#f8f8f2
 *background:#080808
