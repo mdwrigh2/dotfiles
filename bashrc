@@ -101,6 +101,12 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+if [ -d /etc/bash_completion.d ] && ! shopt -oq posix; then
+    for i in $(ls /etc/bash_completion.d); do
+        . /etc/bash_completion.d/$i
+    done
+fi
 # Some alias shortcuts for my code dirs
 alias ccode='cd ~/code/'
 alias cpersonal='cd ~/code/personal'

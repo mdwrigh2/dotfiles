@@ -54,12 +54,24 @@ elif [ $os = "Linux" ]; then
       /usr/bin/xmodmap $HOME/.xmodmap 2&> /dev/null
   fi
 
+  if [ -d /opt/java6/bin ]; then
+    export PATH=/opt/java6/bin:$PATH
+    # I know this is going to eventually break something, but I'm pretty sure it's going to break building android now
+    export JAVA_HOME=/opt/java6
+  fi
+
   export EDITOR=vim
   alias sudo="sudo -E" # have sudo retain my environment
 
+  export LANG=en_US.utf8
+
+  if [ -n "$DISPLAY" ]; then
+    export BROWSER=chromium
+  fi
+
 else
   # Probably BSD or windows
-  echo "Warning: Didn't recognize OS"
+  echo "Warning: Unrecognized OS"
 fi
 
 

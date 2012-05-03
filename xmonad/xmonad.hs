@@ -255,7 +255,7 @@ myStartupHook = return ()
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-	xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmonad/xmobar"
+	xmproc <- spawnPipe "~/.cabal/bin/xmobar ~/.xmonad/xmobar"
 	xmonad $ defaults {
 		logHook       = myLogHook xmproc
 		, manageHook  = manageDocks <+> myManageHook
