@@ -1,6 +1,5 @@
 vim/backup/*
-*.swp
-*.swo
+*.sw[o-z]
 vim/.netrwhist
 vim/.netrwhist
 *.hi
