@@ -124,6 +124,9 @@ command WQ wq
 command W w
 command Q q
 
+" Make it easier to go to the last buffer
+nnoremap <leader>b :b#<CR>
+
 if has("unix")
   let s:uname = system("echo -n $(uname)")
   if s:uname == "Darwin"

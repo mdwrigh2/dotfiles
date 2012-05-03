@@ -17,7 +17,7 @@ export ZSH_THEME="clean"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
-plugins=(git rails3 ruby rvm gem pip brew lol node npm)
+plugins=(git rails3 rvm gem pip brew lol node npm)
 if [[ -e /etc/zsh_command_not_found ]]; then
   # I think this only exists in ubuntu, but in case anyone else has it
   plugins+=(command-not-found)
@@ -42,6 +42,13 @@ if [ $os = "Darwin" ]; then
   function mountAndroid { hdiutil attach ~/android.dmg -mountpoint /Volumes/android; }
   ulimit -S -n 1024
 
+  # if appengine exists, stick it on the path
+  if [ -d $HOME/code/google/google_appengine ]; then
+    export PATH=$HOME/code/google/google_appengine:$PATH
+  fi
+
+  # Fix the node path so we can import global modules
+  export NODE_PATH=/usr/local/lib/node:/usr/local/lib/node_modules
 
 elif [ $os = "Linux" ]; then
 
@@ -110,3 +117,23 @@ alias gcc="gcc -std=c99 -Wall "
 export WORKON_HOME=$HOME/.virtualenvs
 
 unalias gb
+
+# While developing
+
+#zstyle ":completion:*" verbose yes
+#zstyle ":completion:*:descriptions" format ‘%B%d%b’
+#zstyle ":completion:*:messages" format ‘%d’
+#zstyle ":completion:*:warnings" format ‘No matches for: %d’
+#zstyle ":completion:*" group-name ”
+
+#fpath=(~/.completions $fpath)
+
+#autoload -U ~/.completions/*(:t)
+
+
+#r() {
+  #local f
+  #f=(~/.completions/*(.))
+  #unfunction $f:t 2> /dev/null
+  #autoload -U $f:t
+#}
