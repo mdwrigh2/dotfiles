@@ -36,7 +36,7 @@ set directory=~/.vim/tmp
 " Make backspace work on everything, everywhere
 set backspace=indent,eol,start
 
-" Turn on line numbers 
+" Turn on line numbers
 set nu
 
 " Set visual bell rather than audible bell
@@ -178,6 +178,14 @@ let g:Powerline_symbols="unicode"
 " Turn off syntastics syntax highlighting and signs
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_enable_signs = 0
+
+" Highlight clojure's builtins
+let g:clj_highlight_builtins=1
+" Rainbow parens for clojure
+let g:clj_paren_rainbow=1
+
+" Set slime-vim to use tmux (alternative to screen)
+let g:slime_target = "tmux"
 
 augroup ft_fugitive
     au!
