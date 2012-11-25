@@ -137,3 +137,5 @@ unalias gb
   #unfunction $f:t 2> /dev/null
   #autoload -U $f:t
 #}
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

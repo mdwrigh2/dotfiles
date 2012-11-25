@@ -134,3 +134,5 @@ alias gcc="gcc -std=c99 -Wall "
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
