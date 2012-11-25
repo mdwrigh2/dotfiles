@@ -31,7 +31,7 @@ os=$(uname)
 
 if [ $os = "Darwin" ]; then
 
-  export PATH=~/.cabal/bin:/usr/local/share/python:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/cuda/bin:~/android/tools:~/android/platform-tools:~/bin/arm-2010q1/bin:~/bin:/usr/texbin:/usr/local/Cellar/python/2.7.1/bin:~/code/google/depot_tools
+  export PATH=/Users/mdwrigh2/code/src/prebuilt/darwin-x86/toolchain/arm-eabi-4.4.3/bin:~/.cabal/bin:/usr/local/share/python:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/cuda/bin:~/android/tools:~/android/platform-tools:~/bin/arm-2010q1/bin:~/bin:/usr/texbin:/usr/local/Cellar/python/2.7.1/bin:~/code/google/depot_tools
 
   export EDITOR=mvim
 
@@ -117,6 +117,7 @@ alias gcc="gcc -std=c99 -Wall "
 export WORKON_HOME=$HOME/.virtualenvs
 
 unalias gb
+
 
 # While developing
 
