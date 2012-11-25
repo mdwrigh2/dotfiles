@@ -180,9 +180,9 @@ let g:syntastic_enable_highlighting = 0
 let g:syntastic_enable_signs = 0
 
 " Highlight clojure's builtins
-let g:clj_highlight_builtins=1
+let vimclojure#HighlightParen = 1
 " Rainbow parens for clojure
-let g:clj_paren_rainbow=1
+let vimclojure#ParenRainbow = 1
 
 " Set slime-vim to use tmux (alternative to screen)
 let g:slime_target = "tmux"
