@@ -18,7 +18,7 @@ set ttyfast
 set history=1000
 
 " Persistent undos
-if v:version >= 730
+if v:version >= 703
   set undofile
   set undoreload=10000
 endif
@@ -47,6 +47,13 @@ set tags=tags;/
 
 "Enable syntax highlighting
 syntax on
+
+" Auotmatically indent based on file type
+set autoindent
+
+" Setup cindent options
+set cinkeys=0{,0},0),:,0#,!^F,o,O,e
+set cinoptions=:0,l1,g0,+2s,j1,J1
 
 " Case insensitive search (smartcase)
 set ignorecase smartcase
@@ -79,7 +86,9 @@ let maplocalleader="\\"
 " Make it easier to clear search results
 noremap <leader><space> :noh<cr>:call clearmatches()<cr>
 
-
+" Quick shortcut to open vimrc and another to resource it
+nnoremap <leader>ev :split $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Make it easier to move around
 noremap H ^
@@ -210,6 +219,9 @@ set smarttab expandtab
 
 " Set default textwidth to "100" columns
 set textwidth=99
+
+" Round to the nearest shiftwidth when indenting with > and <
+set shiftround
 
 " Have it keep changes to open buffers without saving to the files
 set hidden
