@@ -102,11 +102,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-if [ -d /etc/bash_completion.d ] && ! shopt -oq posix; then
-    for i in $(ls /etc/bash_completion.d); do
-        . /etc/bash_completion.d/$i
-    done
-fi
 # Some alias shortcuts for my code dirs
 alias ccode='cd ~/code/'
 alias cpersonal='cd ~/code/personal'
@@ -127,12 +122,11 @@ PS1='[\u@\h \W$(parse_git_branch " (%s)")]$ '
 alias ..="cd .."
 alias ...="cd ../.."
 alias l="ls -la"
-if [ "$COLORTERM" == "gnome-terminal" ]; then
-  export TERM=xterm-256color
-fi
 alias gcc="gcc -std=c99 -Wall "
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export CCACHE_DIR=/usr/local/google/src/ccache/
+export USE_CCACHE=1
