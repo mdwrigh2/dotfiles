@@ -48,9 +48,6 @@ set tags=tags;/
 "Enable syntax highlighting
 syntax on
 
-" Auotmatically indent based on file type
-set autoindent
-
 " Case insensitive search (smartcase)
 set ignorecase smartcase
 
@@ -77,6 +74,7 @@ iabbrev ldis ಠ_ಠ
 
 " Fix the leader to be something a little nicer
 let mapleader=","
+let maplocalleader="\\"
 
 " Make it easier to clear search results
 noremap <leader><space> :noh<cr>:call clearmatches()<cr>
@@ -127,6 +125,11 @@ command Q q
 " Make it easier to go to the last buffer
 nnoremap <leader>b :b#<CR>
 
+" Remap this so the redraw command executes instaneously
+nnoremap <localleader>x <Plug>RestoreWinPosn
+" Make it easier to ignore redrawing issues
+nnoremap <leader>r :redraw!<CR>
+
 if has("unix")
   let s:uname = system("echo -n $(uname)")
   if s:uname == "Darwin"
@@ -141,13 +144,12 @@ if has("unix")
     " Set font
     set gfn=Inconsolata\ 12
 
-    "Bind copy and paste to Ctrl-Shift-C/V
+    " Bind copy and paste to Ctrl-C/V
     vnoremap <C-C> "+y
     nnoremap <C-C> "+yy
-    noremap <C-V> "+p
-    imap <C-V> <Esc><C-V>a
+    inoremap <C-V> <Esc>"+pa
     cnoremap <C-V> <C-R>+
-    cnoremap <C-V> <C-R>+
+    vnoremap <C-V> "+p
 
   endif
 endif
@@ -170,7 +172,11 @@ nnoremap <leader>gm :Gmove<cr>
 nnoremap <leader>gr :Gremove<cr>
 nnoremap <leader>gl :Shell git gl -18<cr>:wincmd \|<cr>
 
+" Tabularize bindings
 vnoremap <leader>t :Tabularize /
+
+" ctags bindings
+nnoremap <leader>t :tnext<cr>
 
 " Set Powerline to use unicode rather than compatible
 let g:Powerline_symbols="unicode"
@@ -196,11 +202,14 @@ augroup END
 " Built-in LISP settings
 let g:lisp_rainbow = 1
 
-" Set indentation to spaces
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+" Set default indentation to spaces
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set smarttab expandtab
+
+" Set default textwidth to "100" columns
+set textwidth=99
 
 " Have it keep changes to open buffers without saving to the files
 set hidden
@@ -236,6 +245,12 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
+highlight MissingWhitespace ctermbg=Yellow guibg=Yellow
+autocmd BufWinEnter *.java 2match MissingWhitespace  /if(/
+autocmd InsertEnter *.java 2match MissingWhitespace /if(/
+autocmd InsertLeave *.java 2match MissingWhitespace /if(/
+
+
 
 " Remove the toolbar if it's macvim or gvim
 if has("gui_running")
@@ -244,6 +259,9 @@ endif
 
 " Set go filetype
 au BufNewFile,BufRead *.go set filetype=go
+
+" Set aidl filetype
+au BufNewFile,BufRead *.aidl set filetype=java
 
 " Set .y filetype to happy
 "   This may need to be changed back if I need to write something with yacc
@@ -276,16 +294,16 @@ au BufNewFile,BufRead *.md set filetype=markdown
 au FileType python set tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth=79
 
 " Set indentation for Haskell according to the snap style guide
-au FileType haskell set tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth=78
+au FileType haskell set tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth=79
 
 " Set indentation for Ruby according to Google Style Guide
 au Filetype ruby set tabstop=2 shiftwidth=2 expandtab
 
 " Set indentation for C according to Google Style Guide
-au Filetype c set tabstop=2 shiftwidth=2 expandtab
+au Filetype c set tabstop=4 shiftwidth=4 expandtab
 
 " Set indentation for C++ according to Google Style Guide
-au Filetype cpp set tabstop=2 shiftwidth=2 expandtab
+au Filetype cpp set tabstop=4 shiftwidth=4 expandtab tw=99
 
 " Set indentention for Make files
 au Filetype make set noexpandtab
