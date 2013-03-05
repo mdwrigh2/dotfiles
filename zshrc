@@ -92,7 +92,7 @@ export GOROOT=$HOME/go
 
 export NODE_PATH=/usr/local/lib/node:$NODE_PATH
 
-if [ "$COLORTERM" = "gnome-terminal" ]
+if [ "$COLORTERM" = "gnome-terminal" ] && [ -z "$TMUX" ]
 then
   export TERM=xterm-256color
 fi
@@ -140,3 +140,47 @@ unalias gb
 #}
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+alias ccode="cd /usr/local/code/"
+
+# Useful android shortcuts
+alias agrep="grep -RIis --exclude=\"*.xml\" --exclude=\"*.html\" --exclude=\"*.jd\""
+alias cfb="croot && cd frameworks/base"
+alias f="find . -iname"
+alias sb=". build/envsetup.sh"
+
+function psu {
+    mm -j20  && adb sync && \
+    echo "Killing SystemUI..." && \
+    adb shell ps | grep -i com.android.systemui | awk '{print $2}' | xargs adb shell kill && \
+    sleep 1 && \
+    echo "Restarting SystemUI..." && \
+    adb shell am startservice -n com.android.systemui/.SystemUIService
+}
+
+function fmake () {
+    croot && \
+    mmm -j24 $* frameworks/base frameworks/base/core/res frameworks/base/core/jni frameworks/base/libs/androidfw frameworks/native/libs/ui frameworks/native/libs/utils frameworks/base/services/java frameworks/base/services/jni frameworks/base/services/input frameworks/base/policy
+    local ret=$?
+    popd 2>&1 > /dev/null
+    return ret
+}
+
+function syncrestart {
+    adb remount && adb shell stop && sleep 3 && adb sync && adb shell start
+}
+
+function logcat () {
+   logtee /tmp/log.txt -v threadtime $*
+}
+
+function logtee {
+   file=$1;
+   shift;
+   adb logcat $* | tee "$file"
+}
+
+alias kmake="ARCH=arm CROSS_COMPILE=arm-eabi- make"
+
+export CCACHE_DIR=/usr/local/code/ccache/
+export USE_CCACHE=1
