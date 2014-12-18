@@ -53,7 +53,7 @@ set autoindent
 
 " Setup cindent options
 set cinkeys=0{,0},0),:,0#,!^F,o,O,e
-set cinoptions=:0,l1,g0,+2s,j1,J1
+set cinoptions=:0,l1,g0,+2s,j1,J1,(2s
 
 " Case insensitive search (smartcase)
 set ignorecase smartcase
@@ -157,7 +157,6 @@ if has("unix")
     vnoremap <C-C> "+y
     nnoremap <C-C> "+yy
     inoremap <C-V> <Esc>"+pa
-    cnoremap <C-V> <C-R>+
     vnoremap <C-V> "+p
 
   endif
@@ -228,10 +227,11 @@ set hidden
 
 " Setup OmniComplete to be context aware
 let g:SuperTabDefaultCompletionType="context"
+"let g:SuperTabMappingForward="<C-J>"
+let g:SuperTabMappingBackward="<C-K>"
 
 " Prevents Vim 7.0 from setting filetype to 'plaintex'
 let g:tex_flavor='latex'
-
 
 " Ignore silly files
 set wildignore=*.o,*.obj,*.bak,*.exe,*.hi,*.6
@@ -312,7 +312,7 @@ au FileType haskell set tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth
 au Filetype ruby set tabstop=2 shiftwidth=2 expandtab
 
 " Set indentation for C according to Google Style Guide
-au Filetype c set tabstop=4 shiftwidth=4 expandtab
+au Filetype c set tabstop=8 shiftwidth=8 noexpandtab tw=79
 
 " Set indentation for C++ according to Google Style Guide
 au Filetype cpp set tabstop=4 shiftwidth=4 expandtab tw=99
@@ -334,6 +334,48 @@ au Filetype tex let dialect='US'
 " Set settings for XML files
 au Filetype xml set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
+
+
+" ex command for toggling hex mode - define mapping if desired
+command -bar Hexmode call ToggleHex()
+
+" helper function to toggle hex mode
+function ToggleHex()
+  " hex mode should be considered a read-only operation
+  " save values for modified and read-only for restoration later,
+  " and clear the read-only flag for now
+  let l:modified=&mod
+  let l:oldreadonly=&readonly
+  let &readonly=0
+  let l:oldmodifiable=&modifiable
+  let &modifiable=1
+  if !exists("b:editHex") || !b:editHex
+    " save old options
+    let b:oldft=&ft
+    let b:oldbin=&bin
+    " set new options
+    setlocal binary " make sure it overrides any textwidth, etc.
+    let &ft="xxd"
+    " set status
+    let b:editHex=1
+    " switch to hex editor
+    %!xxd
+  else
+    " restore old options
+    let &ft=b:oldft
+    if !b:oldbin
+      setlocal nobinary
+    endif
+    " set status
+    let b:editHex=0
+    " return to normal editing
+    %!xxd -r
+  endif
+  " restore values for modified and read only state
+  let &mod=l:modified
+  let &readonly=l:oldreadonly
+  let &modifiable=l:oldmodifiable
+endfunction
 
 " Setup Binary Editing Mode
 " autocmds to automatically enter hex mode and handle file writes properly

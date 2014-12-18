@@ -9,6 +9,7 @@ import XMonad.Layout.Spiral
 import XMonad.Layout.Tabbed
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
+import Graphics.X11.ExtraTypes.XF86
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -16,7 +17,7 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "urxvt"
+myTerminal      = "gnome-terminal"
 
 -- Width of the window border in pixels.
 --
@@ -39,7 +40,7 @@ myModMask       = mod1Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1:web","2:code","3:msg","4:media","5","6","7","8","9"]
+myWorkspaces    = ["1:irc","2:code","3:web","4:code-explore","5:eclipse","6","7","8","9"]
  
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -118,11 +119,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask              , xK_q     ), restart "xmonad" True)
 
     -- Increase volume
-    , ((controlMask          , xK_equal      ), spawn "amixer -q set Master 10%+")
-    , ((controlMask          , xK_minus      ), spawn "amixer -q set Master 10%-")
-    , ((controlMask          , xK_KP_Add     ), spawn "amixer -q set Master 10%+")
-    , ((controlMask          , xK_KP_Subtract), spawn "amixer -q set Master 10%-")
-    , ((controlMask          , xK_KP_Multiply), spawn "amixer -q set Master toggle") 
+    , ((controlMask          , xK_KP_Add     )          , spawn "pactl set-sink-volume 1 -- +10%")
+    , ((controlMask          , xK_KP_Subtract)          , spawn "pactl set-sink-volume 1 -- -10%")
+    , ((0                    , xF86XK_AudioLowerVolume) , spawn "pactl set-sink-volume 1 -- -10%")
+    , ((0                    , xF86XK_AudioRaiseVolume) , spawn "pactl set-sink-volume 1 -- +10%")
+    , ((modMask .|. shiftMask, xK_i)                    , spawn "fetchotp | xsel -i -b")
     ]
     ++
  
@@ -213,13 +214,9 @@ myManageHook = composeAll
     , className =? "Psx.real"       --> doFloat
     , className =? "Gimp"           --> doFloat
     , className =? "Galculator"     --> doFloat
+    , className =? "Tilda"          --> doFloat
     , resource  =? "Komodo_find2"   --> doFloat
     , resource  =? "compose"        --> doFloat
-    , className =? "Thunderbird-bin" --> doShift "3:msg"
-    , className =? "Pidgin"         --> doShift "3:msg"
-    , className =? "banshee-1"      --> doShift "5:media"
-    , className =? "Ktorrent"       --> doShift "5:media"
-    , className =? "Xchat"          --> doShift "5:media"
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
  
@@ -247,8 +244,12 @@ myFocusFollowsMouse = True
 -- per-workspace layout choices.
 --
 -- By default, do nothing.
-myStartupHook = return ()
- 
+myStartupHook = do
+    spawn "/usr/bin/gnome-keyring-daemon"
+    spawn "/usr/lib/gnome-settings-daemon/gnome-settings-daemon"
+    spawn "/usr/bin/gnome-power-manager"
+    setWMName "LG3D"
+
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
  
@@ -259,7 +260,6 @@ main = do
 	xmonad $ defaults {
 		logHook       = myLogHook xmproc
 		, manageHook  = manageDocks <+> myManageHook
-		, startupHook = setWMName "LG3D"
 	}
  
 -- LogHook

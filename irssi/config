@@ -278,3 +278,23 @@ settings = {
   "fe-text" = { actlist_sort = "refnum"; };
   "perl/core/scripts" = { awl_display_key = "$Q%K|%n$H$C$S"; };
 };
+completions = {
+  ldis = { value = "ಠ_ಠ"; };
+  tableflip = { value = "(╯°□°）╯︵ ┻━┻"; };
+  tableright = { value = "┬─┬ノ( º _ ºノ)"; };
+  YEAH = {
+    value = "(•_•)    (•_•)>⌐■-■    (⌐■_■)    YEAHHHHHHH!!!!";
+  };
+  doubletableflip = {
+    value = "┻━┻ ︵ヽ(`□´)ﾉ︵ ┻━┻";
+  };
+  fliploop = { value = "(╯°□°）╯︵╭(̥ □̥ ╭)"; };
+  turtleflip = { value = "(╯°□°）╯︵\\\\''/ↄ"; };
+  runningbear = { value = "ʕ•.•ʔ"; };
+  tm = { value = "™"; };
+};
+hilights = (
+  { text = "michaelwr"; nick = "yes"; word = "yes"; },
+  { text = "mdwright"; nick = "yes"; word = "yes"; },
+  { text = "mdwrigh2"; nick = "yes"; word = "yes"; }
+);

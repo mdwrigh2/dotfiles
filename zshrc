@@ -52,7 +52,7 @@ if [ $os = "Darwin" ]; then
 
 elif [ $os = "Linux" ]; then
 
-  export PATH=/opt/scala-2.8.1.final/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/cuda/bin:~/android/tools:~/android/platform-tools:~/bin/arm-2010q1/bin:~/bin:~/.cabal/bin
+  export PATH=/opt/scala-2.8.1.final/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/cuda/bin:~/android/tools:~/android/platform-tools:~/bin/arm-2010q1/bin:~/bin:~/.cabal/bin:~/android-ndk/
 
   alias apt-get-suggests-install="sudo apt-get -o APT::Install-Suggests=\"true\" -o APT::Install-Recommends=\"true\" install"
 
@@ -98,8 +98,6 @@ then
 fi
 
 
-unsetopt auto_name_dirs
-
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 # export PS2="%{$fg[$NCOLOR]%}%B%n%b%{$reset_color%}:%{$fg[blue]%}%B%c/%b%{$reset_color%} $ "
@@ -113,6 +111,7 @@ function no_git_off {
 
 
 alias gcc="gcc -std=c99 -Wall "
+alias popd="popd -q"
 
 export WORKON_HOME=$HOME/.virtualenvs
 
@@ -142,12 +141,55 @@ unalias gb
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 alias ccode="cd /usr/local/code/"
+alias caosp="cd /usr/local/google/src/aosp"
+alias cm="ccode && cd android/master"
+alias cms="cm && sb"
+alias cl="ccode && cd android/lmp-mr1-dev"
+alias cls="cl && sb"
+alias ck="ccode && cd kernel/common"
+
+# Remove autocompletion of users
+unsetopt cdablevars
+
+unsetopt auto_name_dirs
+
+function ffbackup() {
+    adb root && \
+        mkdir com.anompom.fanfictionreader && \
+        pushd com.anompom.fanfictionreader > /dev/null && \
+        adb pull /data/data/com.anompom.fanfictionreader && \
+        popd
+}
+
+function ffrestore() {
+    adb root && \
+        adb remount &&
+        adb push com.anompom.fanfictionreader/. /data/data/com.anompom.fanfictionreader
+}
+
 
 # Useful android shortcuts
-alias agrep="grep -RIis --exclude=\"*.xml\" --exclude=\"*.html\" --exclude=\"*.jd\""
-alias cfb="croot && cd frameworks/base"
+function agrep() {
+    egrep -RIins --exclude="*.html" --exclude="*.jd" "$@" .
+}
+alias cfb='cd $(gettop)/frameworks/base'
+alias cfn='cd $(gettop)/frameworks/native'
+alias ccts='cd $(gettop)/cts'
 alias f="find . -iname"
 alias sb=". build/envsetup.sh"
+
+# sweedish chef
+function bork {
+    $@
+    local ret=$?
+    if [ $ret -ne 0 ]
+    then
+        echo -e "\e[0;31mFAILURE\e[00m"
+    else
+        echo -e "\e[0;32mSUCCESS\e[00m"
+    fi
+    return ret
+}
 
 function psu {
     mm -j20  && adb sync && \
@@ -159,12 +201,23 @@ function psu {
 }
 
 function fmake () {
-    croot && \
-    mmm -j24 $* frameworks/base frameworks/base/core/res frameworks/base/core/jni frameworks/base/libs/androidfw frameworks/native/libs/ui frameworks/native/libs/utils frameworks/base/services/java frameworks/base/services/jni frameworks/base/services/input frameworks/base/policy
+    do_from_base mmm -j24 $* frameworks/base frameworks/base/core/res frameworks/base/core/jni frameworks/base/libs/input frameworks/native/libs/ui frameworks/native/libs/input frameworks/native/services/inputflinger frameworks/native/services/surfaceflinger frameworks/base/services frameworks/base/policy
+}
+
+function do_from_base {
+    local curdir=$PWD
+    croot && $*
     local ret=$?
-    popd 2>&1 > /dev/null
+    if [[ "$PWD" != "$curdir" ]]; then
+        popd 2>&1 > /dev/null
+    fi
     return ret
 }
+
+alias fmake="bork fmake"
+alias mm="bork mm"
+alias m="bork m"
+alias mma="bork mm"
 
 function syncrestart {
     adb remount && adb shell stop && sleep 3 && adb sync && adb shell start
@@ -180,7 +233,95 @@ function logtee {
    adb logcat $* | tee "$file"
 }
 
-alias kmake="ARCH=arm CROSS_COMPILE=arm-eabi- make"
+function pt() {
+  if [[ -z "$ANDROID_PRODUCT_OUT" ]]; then
+    echo "No product set. Run lunch."
+    return 1
+  fi
 
-export CCACHE_DIR=/usr/local/code/ccache/
-export USE_CCACHE=1
+  local curdir=$PWD
+  croot && \
+  mmm -j24 external/libvterm packages/apps/Terminal && \
+      adb install -r $ANDROID_PRODUCT_OUT/system/app/Terminal.apk && \
+      adb shell am start -n com.android.terminal/.TerminalActivity
+  local ret=$?
+  cd $curdir
+  return ret
+}
+
+function stack() {
+    do_from_base ./vendor/google/tools/stack $*
+}
+
+function fa() {
+    do_from_base ./vendor/google/tools/flashall $*
+}
+
+function ptouch() {
+    if [[ -z "$1" ]]; then
+        echo "argument missing: ptouch requires a path to the firmware image"
+        return 1
+    fi
+    adb push $HOME/Downloads/iap_0322 /data/ && \
+        adb push "$1" /data/ && \
+        adb shell chmod 770 /data/iap_0322 && \
+        adb shell /data/iap_0322 -n 1 -f /data/$(basename "$1")
+}
+
+function swipe() {
+    local t="$1"||1000
+    adb shell input touchscreen swipe 0 300 1000 300 "$t" && \
+        adb shell input touchscreen swipe 1000 300 0 300 "$t"
+}
+
+alias killmonkey='adb shell ps | grep monkey | awk '\''{print $2}'\'' | xargs adb shell kill'
+
+alias kmake="ARCH=arm SUBARCH=arm CROSS_COMPILE=arm-eabi- make"
+alias vmake="ARCH=arm64 CROSS_COMPILE=${ANDROID_TOOLCHAIN%/}/aarch64-linux-android- make"
+alias xmake="ARCH=x86 CROSS_COMPILE=${ANDROID_TOOLCHAIN%/}/x86_64-linux-android- make"
+
+export ANDROID_USE_AMAKE=true
+
+function astudio() {
+    $HOME/android-studio/bin/android $HOME/android-studio/bin/studio.sh
+}
+
+function flash() {
+    cd $HOME/flashstation/ && \
+    curl -L http://android_flashstation.corp.google.com/android_flashstation.par -O && \
+	chmod +x android_flashstation.par && \
+    XDG_DATA_HOME=$HOME/.local/share BROWSER=google-chrome $HOME/flashstation/android_flashstation.par
+}
+
+alias g="godir"
+alias ru='repo upload --cbr .'
+
+function rs() {
+    repo start "$@" .
+}
+
+PATH=$PATH:/usr/lib/google-golang/bin/
+
+function setup_tree_env_vars() {
+    local ANDROID_TREE_LOCATION="/usr/local/code/android"
+    for i in $(ls $ANDROID_TREE_LOCATION); do
+        export $i:u:gs/-/_/=$ANDROID_TREE_LOCATION/$i
+    done
+}
+setup_tree_env_vars
+
+function player_led() {
+    if [[ -z "$1" || -z "$2" ]]; then
+        echo "Usage: player_led [file] [led]"
+        return 1
+    fi
+    node=$1
+    player=$2;
+    for i in {0..3}; do
+        if [ "$i" = "$player" ]; then
+            adb shell sendevent $node 17 $i 1
+        else
+            adb shell sendevent $node 17 $i 0
+        fi
+    done
+}
