@@ -292,6 +292,7 @@ completions = {
   turtleflip = { value = "(╯°□°）╯︵\\\\''/ↄ"; };
   runningbear = { value = "ʕ•.•ʔ"; };
   tm = { value = "™"; };
+  shrug = { value = "¯_(ツ)_/¯"; };
 };
 hilights = (
   { text = "michaelwr"; nick = "yes"; word = "yes"; },
