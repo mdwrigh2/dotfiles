@@ -31,3 +31,5 @@
   gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
   # List aliases
   la = "!git config -l | grep alias | cut -c 7-"
+[push]
+	default = simple
