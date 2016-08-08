@@ -305,6 +305,10 @@ PATH=$PATH:/usr/lib/google-golang/bin/
 
 function setup_tree_env_vars() {
     local ANDROID_TREE_LOCATION="/usr/local/code/android"
+    if [ ! -d $ANDROID_TREE_LOCATION ]; then
+        return
+    fi
+
     for i in $(ls $ANDROID_TREE_LOCATION); do
         export $i:u:gs/-/_/=$ANDROID_TREE_LOCATION/$i
     done
