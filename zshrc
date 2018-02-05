@@ -17,7 +17,7 @@ export ZSH_THEME="clean"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
-plugins=(git rails3 rvm gem pip brew lol node npm)
+plugins=(git rvm gem pip brew lol node npm)
 if [[ -e /etc/zsh_command_not_found ]]; then
   # I think this only exists in ubuntu, but in case anyone else has it
   plugins+=(command-not-found)
@@ -28,6 +28,8 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 
 os=$(uname)
+
+export CODE=/usr/local/code
 
 if [ $os = "Darwin" ]; then
 
@@ -52,7 +54,7 @@ if [ $os = "Darwin" ]; then
 
 elif [ $os = "Linux" ]; then
 
-  export PATH=/opt/scala-2.8.1.final/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/cuda/bin:~/android/tools:~/android/platform-tools:~/bin/arm-2010q1/bin:~/bin:~/.cabal/bin:~/android-ndk/
+  export PATH=/opt/scala-2.8.1.final/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/cuda/bin:~/Android/Sdk/tools:~/Android/Sdk/platform-tools:~/bin/arm-2010q1/bin:~/bin:~/.cabal/bin:~/android-ndk/:~/code/third_party/depot_tools
 
   alias apt-get-suggests-install="sudo apt-get -o APT::Install-Suggests=\"true\" -o APT::Install-Recommends=\"true\" install"
 
@@ -101,7 +103,6 @@ fi
 
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
-# export PS2="%{$fg[$NCOLOR]%}%B%n%b%{$reset_color%}:%{$fg[blue]%}%B%c/%b%{$reset_color%} $ "
 function no_git {
   export PS1="%{$fg[$NCOLOR]%}%B%n%b%{$reset_color%}:%{$fg[blue]%}%B%c/%b%{$reset_color%} $ "
 }
@@ -113,6 +114,8 @@ function no_git_off {
 
 alias gcc="gcc -std=c99 -Wall "
 alias popd="popd -q"
+
+alias feh="feh --scale-down --auto-zoom"
 
 export WORKON_HOME=$HOME/.virtualenvs
 
@@ -141,37 +144,26 @@ unalias gb
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
-alias ccode="cd /usr/local/code/"
-alias caosp="cd /usr/local/google/src/aosp"
-alias cm="ccode && cd android/master"
+alias ccode="cd $CODE"
+alias caosp="cd $CODE/android/aosp"
+alias cm="cd $CODE/android/master"
 alias cms="cm && sb"
-alias cl="ccode && cd android/lmp-mr1-dev"
-alias cls="cl && sb"
-alias ck="ccode && cd kernel/common"
+alias cnyc="cd $CODE/android/nyc-mr1-dev"
+alias cns="cnyc && sb"
+alias coc="cd $CODE/android/oc-mr1-dev"
+alias cos="coc && sb"
+alias ck="cd $CODE/kernel"
+
+# Always use GOMA when available
+export USE_GOMA=true
 
 # Remove autocompletion of users
 unsetopt cdablevars
-
 unsetopt auto_name_dirs
-
-function ffbackup() {
-    adb root && \
-        mkdir com.anompom.fanfictionreader && \
-        pushd com.anompom.fanfictionreader > /dev/null && \
-        adb pull /data/data/com.anompom.fanfictionreader && \
-        popd
-}
-
-function ffrestore() {
-    adb root && \
-        adb remount &&
-        adb push com.anompom.fanfictionreader/. /data/data/com.anompom.fanfictionreader
-}
-
 
 # Useful android shortcuts
 function agrep() {
-    egrep -RIins --exclude="*.html" --exclude="*.jd" "$@" .
+    egrep -RIins --exclude="*.html" --exclude="*.jd" --exclude="*.ai" "$@" .
 }
 alias cfb='cd $(gettop)/frameworks/base'
 alias cfn='cd $(gettop)/frameworks/native'
@@ -255,7 +247,7 @@ function stack() {
 }
 
 function fa() {
-    do_from_base ./vendor/google/tools/flashall $*
+    do_from_base ./vendor/google/tools/flashall --disable_verity $*
 }
 
 function ptouch() {
@@ -277,11 +269,27 @@ function swipe() {
 
 alias killmonkey='adb shell ps | grep monkey | awk '\''{print $2}'\'' | xargs adb shell kill'
 
-alias kmake="ARCH=arm SUBARCH=arm CROSS_COMPILE=arm-eabi- make"
-alias vmake="ARCH=arm64 CROSS_COMPILE=${ANDROID_TOOLCHAIN%/}/aarch64-linux-android- make"
-alias xmake="ARCH=x86 CROSS_COMPILE=${ANDROID_TOOLCHAIN%/}/x86_64-linux-android- make"
+function kmake() {
+    ARCH=arm64 CROSS_COMPILE=${ANDROID_TOOLCHAIN%/}/aarch64-linux-android- make
+}
 
-export ANDROID_USE_AMAKE=true
+function copy-if-file() {
+    if [[ -f $1 ]]; then
+        echo "cp $1 $2"
+        cp $1 $2
+    fi
+}
+
+function cwk() {
+    if [[ -z "$1" ]]; then
+        echo "argument missing: $0 requires a name for the device to copy to"
+        return 1
+    fi
+
+    copy-if-file $CODE/kernel/arch/arm64/boot/Image.lz4-dtb $1/
+    copy-if-file $CODE/kernel/arch/arm64/boot/dtbo.img $1/
+    find $CODE/kernel/drivers -name "*.ko" | xargs --verbose -I args cp args $1/
+}
 
 function astudio() {
     $HOME/android-studio/bin/android $HOME/android-studio/bin/studio.sh
@@ -295,13 +303,11 @@ function flash() {
 }
 
 alias g="godir"
-alias ru='repo upload --cbr .'
+alias ru='yes | repo upload --cbr .'
 
 function rs() {
     repo start "$@" .
 }
-
-PATH=$PATH:/usr/lib/google-golang/bin/
 
 function setup_tree_env_vars() {
     local ANDROID_TREE_LOCATION="/usr/local/code/android"
@@ -329,4 +335,49 @@ function player_led() {
             adb shell sendevent $node 17 $i 0
         fi
     done
+}
+
+function setup_trace() {
+    adb root && adb wait-for-device && adb shell "echo 1 > /d/tracing/events/mdss/enable"
+}
+
+function trace() {
+    do_from_base ./external/chromium-trace/systrace.py \
+        sched freq idle am wm gfx view binder_driver workq sync irq input power "$@"
+}
+
+function run_cts() {
+    cts-tradefed run commandAndExit cts-dev $@
+}
+
+function screenshot() {
+    adb shell screencap -p /sdcard/screen.png
+    adb pull /sdcard/screen.png $HOME/Downloads/$1.png
+    adb shell rm /sdcard/screen.png
+}
+
+function monitor() {
+    local f=$1
+    shift;
+    while true ; do
+        inotifywait -qe close_write $f
+        echo "Done!"
+        $*
+    done;
+}
+
+function run_apicheck() {
+    do_from_base /bin/bash -c "out/host/linux-x86/bin/apicheck -JXmx1024m -J\"classpath /usr/lib/jvm/java-8-openjdk-amd64/bin/../lib/tools.jar:out/host/linux-x86/framework/doclava.jar:out/host/linux-x86/framework/jsilver.jar\"  -hide 2 -hide 3 -hide 4 -hide 5 -hide 6 -hide 24 -hide 25 -hide 26 -hide 27 -error 7 -error 8 -error 9 -error 10 -error 11 -error 12 -error 13 -error 14 -error 15 -error 16 -error 17 -error 18   prebuilts/sdk/api/26.txt  out/target/common/obj/PACKAGING/public_api.txt  frameworks/base/api/removed.txt  out/target/common/obj/PACKAGING/removed.txt"
+}
+
+function arm64env() {
+    export ARCH=arm64
+    export CROSS_COMPILE=aarch64-linux-android-
+    export CLANG_TRIPLE=$(echo $CROSS_COMPILE | sed -e 's/android.*-/gnu-/')
+    export PATH=$MASTER/prebuilts/clang/host/linux-x86/clang-stable/bin:$PATH
+    export PATH=$MASTER/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin:$PATH
+    export PATH=$MASTER/prebuilts/misc/linux-x86/dtc:$PATH
+    export PATH=$MASTER/prebuilts/misc/linux-x86/lz4:$PATH
+    export PATH=$MASTER/prebuilts/misc/linux-x86/libufdt:$PATH
+    export PATH=$MASTER/prebuilts/misc/linux-x86/yasm:$PATH
 }
