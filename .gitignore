@@ -2,6 +2,7 @@ vim/backup/*
 *.sw[o-z]
 vim/.netrwhist
 vim/.netrwhist
+vim/tmp/*
 *.hi
 *.o
 xmonad/xmonad.errors

@@ -1,6 +1,7 @@
 import System.IO
 import System.Exit
 import XMonad
+import XMonad.Actions.Volume
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.SetWMName
@@ -119,8 +120,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask              , xK_q     ), restart "xmonad" True)
 
     -- Increase volume
-    , ((controlMask          , xK_KP_Add     )          , spawn "pactl set-sink-volume 1 -- +10%")
-    , ((controlMask          , xK_KP_Subtract)          , spawn "pactl set-sink-volume 1 -- -10%")
+    , ((controlMask          , xK_KP_Add     )          , raiseVolume 5 >> return ())
+    , ((controlMask          , xK_KP_Subtract)          , lowerVolume 5 >> return ())
     , ((0                    , xF86XK_AudioLowerVolume) , spawn "pactl set-sink-volume 1 -- -10%")
     , ((0                    , xF86XK_AudioRaiseVolume) , spawn "pactl set-sink-volume 1 -- +10%")
     , ((modMask .|. shiftMask, xK_i)                    , spawn "fetchotp | xsel -i -b")
@@ -248,6 +249,9 @@ myStartupHook = do
     spawn "/usr/bin/gnome-keyring-daemon"
     spawn "/usr/lib/gnome-settings-daemon/gnome-settings-daemon"
     spawn "/usr/bin/gnome-power-manager"
+    spawn "compton --backend glx --paint-on-overlay -b"
+    spawn "feh --bg-scale $HOME/Wallpapers/android-wallpaper.jpg"
+    spawn "xcompmgr -a"
     setWMName "LG3D"
 
 ------------------------------------------------------------------------
@@ -256,7 +260,7 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-	xmproc <- spawnPipe "~/.cabal/bin/xmobar ~/.xmonad/xmobar"
+	xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar"
 	xmonad $ defaults {
 		logHook       = myLogHook xmproc
 		, manageHook  = manageDocks <+> myManageHook

@@ -139,6 +139,8 @@ nnoremap <localleader>x <Plug>RestoreWinPosn
 " Make it easier to ignore redrawing issues
 nnoremap <leader>r :redraw!<CR>
 
+nnoremap <C-t> :execute "tjump " . expand("<cword>")<CR>
+
 if has("unix")
   let s:uname = system("echo -n $(uname)")
   if s:uname == "Darwin"
@@ -192,6 +194,9 @@ let g:Powerline_symbols="unicode"
 " Turn off syntastics syntax highlighting and signs
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_enable_signs = 0
+
+" Disable vim-markdown's folding by default
+let g:vim_markdown_folding_disabled = 1
 
 " Highlight clojure's builtins
 let vimclojure#HighlightParen = 1
@@ -293,6 +298,8 @@ au BufNewFile,BufRead *.njs set filetype=javascript
 au BufNewFile,Bufread *.asm set filetype=masm
 au BufNewFile,Bufread *.ASM set filetype=masm
 
+au BufNewFile,Bufread *.mk set filetype=amake
+
 " Setup django templating highlighting for all html
 au BufNewFile,Bufread *.html set filetype=htmldjango tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
@@ -311,14 +318,17 @@ au FileType haskell set tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth
 " Set indentation for Ruby according to Google Style Guide
 au Filetype ruby set tabstop=2 shiftwidth=2 expandtab
 
-" Set indentation for C according to Google Style Guide
-au Filetype c set tabstop=8 shiftwidth=8 noexpandtab tw=79
+" Set indentation for C according to Android style
+au Filetype c set tabstop=4 shiftwidth=4 expandtab tw=79
 
 " Set indentation for C++ according to Google Style Guide
 au Filetype cpp set tabstop=4 shiftwidth=4 expandtab tw=99
 
 " Set indentention for Make files
 au Filetype make set noexpandtab
+
+" Set indentention for Android Make files
+au Filetype amake set expandtab syntax=make
 
 " Set indentation for Go files
 au Filetype go setlocal noexpandtab tabstop=4 softtabstop=4 shiftwidth=4
