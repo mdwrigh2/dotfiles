@@ -223,6 +223,7 @@ set smarttab expandtab
 
 " Set default textwidth to "100" columns
 set textwidth=99
+set colorcolumn=+1
 
 " Round to the nearest shiftwidth when indenting with > and <
 set shiftround
@@ -249,8 +250,8 @@ colorscheme molokai
 set t_Co=256
 
 
-" Mark trailing whitespace
-set listchars=tab:\ \ ,trail:\ ,extends:»,precedes:«
+" Mark unexpected whitespace
+set list listchars=tab:»·,trail:·,nbsp:·
 if &background == "dark"
   highlight ExtraWhitespace ctermbg=Red guibg=Red
 else
@@ -262,11 +263,11 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
+" Mark missing whitespace
 highlight MissingWhitespace ctermbg=Yellow guibg=Yellow
 autocmd BufWinEnter *.java 2match MissingWhitespace  /if(/
 autocmd InsertEnter *.java 2match MissingWhitespace /if(/
 autocmd InsertLeave *.java 2match MissingWhitespace /if(/
-
 
 
 " Remove the toolbar if it's macvim or gvim
@@ -439,7 +440,7 @@ if has("autocmd")
 endif
 
 
-" Who doesn't live Nyan cat?
+" Who doesn't love Nyan cat?
 function! NyanMe() " {{{
     hi NyanFur             guifg=#BBBBBB
     hi NyanPoptartEdge     guifg=#ffd0ac

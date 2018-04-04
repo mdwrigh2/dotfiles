@@ -298,7 +298,7 @@ function astudio() {
 function flash() {
     cd $HOME/flashstation/ && \
     curl -L http://android_flashstation.corp.google.com/android_flashstation.par -O && \
-	chmod +x android_flashstation.par && \
+    chmod +x android_flashstation.par && \
     XDG_DATA_HOME=$HOME/.local/share BROWSER=google-chrome $HOME/flashstation/android_flashstation.par
 }
 

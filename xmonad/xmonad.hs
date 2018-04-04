@@ -57,7 +57,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     [ ((modMask .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch gmrun
-    , ((modMask .|. controlMask, xK_l     ), spawn "gnome-screensaver-command --lock")
+    , ((modMask .|. controlMask, xK_l     ), spawn "dm-tool lock")
 
     -- launch dmenu
     , ((modMask,               xK_p     ), spawn "dmenu_run")
@@ -122,9 +122,8 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- Increase volume
     , ((controlMask          , xK_KP_Add     )          , raiseVolume 5 >> return ())
     , ((controlMask          , xK_KP_Subtract)          , lowerVolume 5 >> return ())
-    , ((0                    , xF86XK_AudioLowerVolume) , spawn "pactl set-sink-volume 1 -- -10%")
-    , ((0                    , xF86XK_AudioRaiseVolume) , spawn "pactl set-sink-volume 1 -- +10%")
-    , ((modMask .|. shiftMask, xK_i)                    , spawn "fetchotp | xsel -i -b")
+    , ((0                    , xF86XK_AudioLowerVolume) , spawn "amixer sset Master 10%-")
+    , ((0                    , xF86XK_AudioRaiseVolume) , spawn "amixer sset Master 10%+")
     ]
     ++
  
@@ -174,7 +173,7 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myTabConfig = defaultTheme {   activeBorderColor = "#7C7C7C"
+myTabConfig = def {   activeBorderColor = "#7C7C7C"
                              , activeTextColor = "#CEFFAC"
                              , activeColor = "#000000"
                              , inactiveBorderColor = "#7C7C7C"
@@ -184,16 +183,16 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| tabbed shrinkText myTabConfig
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
- 
+
      -- The default number of windows in the master pane
      nmaster = 1
- 
+
      -- Default proportion of screen occupied by master pane
      ratio   = 1/2
- 
+
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
- 
+
 ------------------------------------------------------------------------
 -- Window rules:
  
@@ -236,10 +235,10 @@ myFocusFollowsMouse = True
 --
 -- > logHook = dynamicLogDzen
 --
- 
+
 ------------------------------------------------------------------------
 -- Startup hook
- 
+
 -- Perform an arbitrary action each time xmonad starts or is restarted
 -- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
 -- per-workspace layout choices.
@@ -256,22 +255,22 @@ myStartupHook = do
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
- 
+
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-	xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar"
-	xmonad $ defaults {
-		logHook       = myLogHook xmproc
-		, manageHook  = manageDocks <+> myManageHook
-	}
- 
+    xmproc <- spawnPipe "xmobar ~/.xmonad/xmobar"
+    xmonad $ docks defaults {
+        logHook       = myLogHook xmproc
+        , manageHook  = manageDocks <+> myManageHook
+    }
+
 -- LogHook
 myLogHook h = dynamicLogWithPP $ customPP { ppOutput = hPutStrLn h }
 
 -- Looks for xmobar
 customPP :: PP
-customPP = defaultPP {
+customPP = def {
     ppHidden  = color "white",
     ppCurrent = color "yellow" . wrap "[" "]",
     ppUrgent  = color "red" . wrap "*" "*",
@@ -287,7 +286,7 @@ customPP = defaultPP {
 -- 
 -- No need to modify this.
 --
-defaults = defaultConfig {
+defaults = def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,

@@ -1,13 +1,13 @@
 [user]
-	name = Michael Wright
-	email = mdwrigh2@ncsu.edu
+    name = Michael Wright
+    email = mdwrigh2@ncsu.edu
 [merge]
-	tool = vimdiff
+    tool = vimdiff
 [core]
-	editor = vim
-	excludesfile = ~/.gitignore
+    editor = vim
+    excludesfile = ~/.gitignore
 [color]
-	ui = auto
+    ui = auto
 [alias]
     lol = log --oneline --decorate --graph
     l50 = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m  %-50s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
@@ -23,7 +23,7 @@
     fl = log -u
   # Files changed in last commit
     dl = "!git ll -1"
-  #Find files
+  # Find files
     f = "!git ls-files | grep -i"
   # Grep codebase
     gr = grep -Ii
@@ -34,9 +34,11 @@
     cdiff = "!git diff \"$1^..$1\""
     cp = cherry-pick
 
+    branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
+
 [grep]
-	patternType = perl
+    patternType = perl
 [push]
-	default = simple
+    default = simple
 [rebase]
     autoStash = true
