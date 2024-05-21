@@ -343,7 +343,9 @@ au Filetype tex SPCheck
 au Filetype tex let dialect='US'
 
 " Set settings for XML files
+"let g:xml_syntax_folding=1
 au Filetype xml set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+au FileType xml setlocal foldmethod=syntax
 
 
 
