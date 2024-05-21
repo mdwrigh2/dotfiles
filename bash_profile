@@ -43,3 +43,4 @@ function parse_git_branch {
 }
  
 PS1='[\u@\h \W$(parse_git_branch " (%s)")]\$ '
+. "$HOME/.cargo/env"

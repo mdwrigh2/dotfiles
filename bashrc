@@ -130,3 +130,4 @@ fi
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export CCACHE_DIR=/usr/local/google/src/ccache/
 export USE_CCACHE=1
+. "$HOME/.cargo/env"
