@@ -18,3 +18,4 @@ Thumbs.db
 *.out
 *.toc
 *.synctex.gz
+.vscode/
