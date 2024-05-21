@@ -1,44 +1,63 @@
 [user]
     name = Michael Wright
-    email = mdwrigh2@ncsu.edu
-[merge]
-    tool = vimdiff
+    email = terminallyalive@gmail.com
+
 [core]
     editor = vim
     excludesfile = ~/.gitignore
+    pager = delta
+
+[push]
+    default = simple
+
+[fetch]
+    parallel = 8
+
+[rebase]
+    autoStash = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+[interactive]
+    diffFilter = delta --color-only
+
 [color]
     ui = auto
+
 [alias]
     lol = log --oneline --decorate --graph
     l50 = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m  %-50s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
     l80 = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m  %-80s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{79}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
     lg50 = "!git log --graph --color=always --abbrev-commit --date=relative --pretty=format:'%x00%h%x00%s%x00%cd%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m %-50s \\033[32m%14s\\033[0m \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5, $6 }' | less -R"
     lg80 = "!git log --graph --color=always --abbrev-commit --date=relative --pretty=format:'%x00%h%x00%s%x00%cd%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m %-80s \\033[32m%14s\\033[0m \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{79}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5, $6 }' | less -R"
-  # Some handy log formats
+    # Some handy log formats
     ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
     ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
     lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
-  # Changes for the given file
+    # Changes for the given file
     filelog = log -u
     fl = log -u
-  # Files changed in last commit
+    # Files changed in last commit
     dl = "!git ll -1"
-  # Find files
-    f = "!git ls-files | grep -i"
-  # Grep codebase
-    gr = grep -Ii
-  # Grep from root folder
-    gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
-  # List aliases
-    la = "!git config -l | grep alias | cut -c 7-"
-    cdiff = "!git diff \"$1^..$1\""
+    # See the delta from a single commit
+    cdiff = !sh -c \"git diff \\\"$1^..$1\\\"\"
+    # Convenient alias for cherry-pick
     cp = cherry-pick
 
+    # Nice way to show branches
     branches = for-each-ref --sort=-committerdate --format=\"%(color:blue)%(authordate:relative)\t%(color:red)%(authorname)\t%(color:white)%(color:bold)%(refname:short)\" refs/remotes
 
 [grep]
     patternType = perl
-[push]
-    default = simple
-[rebase]
-    autoStash = true
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    side-by-side = true
+
+    # delta detects terminal colors automatically; set one of these to disable auto-detection
+    # dark = true
+    # light = true
