@@ -139,8 +139,12 @@ function syncrestart {
     adb shell remount && adb shell stop && sleep 3 && adb sync && adb shell start
 }
 
-function logcat () {
+function logcat {
    logtee /tmp/log.txt -v threadtime $*
+}
+
+function dumpsys {
+    adb shell dumpsys $*
 }
 
 function logtee {
