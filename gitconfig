@@ -57,6 +57,9 @@
 [delta]
     navigate = true    # use n and N to move between diff sections
     side-by-side = true
+    line-numbers = false
+    hunk-header-style = omit-code-fragment line-number
+    hunk-header-decoration-style = blue ul
 
     # delta detects terminal colors automatically; set one of these to disable auto-detection
     # dark = true
