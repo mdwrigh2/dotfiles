@@ -170,6 +170,36 @@ function copy-if-file() {
 
 alias g="godir"
 
+# Use the typical fd command name if it's installed as fdfind
+# https://github.com/sharkdp/fd
+if command -v fdfind &> /dev/null; then
+    alias fd="fdfind"
+fi
+
+# Swap out cat for bat
+# https://github.com/sharkdp/bat
+if command -v bat &> /dev/null; then
+    alias cat="bat"
+fi
+
+# Swap out ls for eza
+# https://github.com/eza-community/eza
+if command -v eza &> /dev/null; then
+    alias ls="eza"
+fi
+
+# Add fzf key bindings if the directory exists.
+# https://github.com/junegunn/fzf
+if [ -d /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
+    source /usr/share/doc/fzf/examples/key-bindings.zsh
+fi
+
+# Add zoxicde commands (z, zi) if it's installed.
+# https://github.com/ajeetdsouza/zoxide
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init zsh)"
+fi
+
 # ru [FLAGS] [LDAPS...]
 function ru() {
   cmd="repo upload --cbr -o l=Presubmit-Ready+1 "
