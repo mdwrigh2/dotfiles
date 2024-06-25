@@ -197,7 +197,7 @@ fi
 
 # Add fzf key bindings if the directory exists.
 # https://github.com/junegunn/fzf
-if [ -d /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
+if [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
     source /usr/share/doc/fzf/examples/key-bindings.zsh
 fi
 
