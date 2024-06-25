@@ -60,6 +60,10 @@ elif [ $os = "Linux" ]; then
       /usr/bin/xmodmap $HOME/.xmodmap 2&> /dev/null
   fi
 
+  # Bind alt-left and alt-right
+  bindkey "^[[1;3C" forward-word
+  bindkey "^[[1;3D" backward-word
+
   export EDITOR=vim
 
   export LANG=en_US.utf8
@@ -92,6 +96,7 @@ unalias gb
 alias ccode="cd $CODE"
 alias caosp="cd $CODE/android/aosp-main"
 alias cm="cd $CODE/android/main"
+alias cas="caosp && sb"
 alias cms="cm && sb"
 
 # Remove autocompletion of users
