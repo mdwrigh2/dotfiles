@@ -136,9 +136,11 @@ function do_from_base {
     return ret
 }
 
-alias mm="bork mm"
 alias m="bork m"
-alias mma="bork mm"
+alias mm="bork mm"
+alias mma="bork mma"
+alias mmm="bork mmm"
+alias mmma="bork mmma"
 
 function syncrestart {
     adb shell remount && adb shell stop && sleep 3 && adb sync && adb shell start
