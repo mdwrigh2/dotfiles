@@ -199,6 +199,8 @@ fi
 # https://github.com/junegunn/fzf
 if [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ]; then
     source /usr/share/doc/fzf/examples/key-bindings.zsh
+elif command -v fzf &> /dev/null; then
+    source <(fzf --zsh)
 fi
 
 # Add zoxicde commands (z, zi) if it's installed.
