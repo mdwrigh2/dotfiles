@@ -219,6 +219,17 @@ if command -v zoxide &> /dev/null; then
     eval "$(zoxide init zsh)"
 fi
 
+function ssh() {
+    command ssh $*
+    # Disable mouse modes.
+    # tmux leaves the terminal in a bad state when ssh abruptly disconnects.
+    # There's probably other things that need to be cleaned up, but mouse
+    # mode is the most annoying and running reset on every ssh disconnect is
+    # pretty disruptive since it also clears the terminal. Just fixing mouse mode
+    # after every disconnect is basically good enough for now.
+    echo -e '\e[?1002;1005l'
+}
+
 # ru [FLAGS] [LDAPS...]
 function ru() {
   cmd="repo upload --cbr -o l=Presubmit-Ready+1 "
