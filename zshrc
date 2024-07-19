@@ -72,6 +72,16 @@ elif [ $os = "Linux" ]; then
     export BROWSER=chromium
   fi
 
+  function adb() {
+    local pid
+    pid=$(pgrep -o adb)
+    if [ $? -eq 0 ]; then
+        /proc/$pid/exe "$@"
+    else
+        command adb "$@"
+    fi
+  }
+
 else
   # Probably BSD or windows
   echo "Warning: Unrecognized OS"
@@ -257,16 +267,6 @@ function monitor() {
         echo "Done!"
         $*
     done;
-}
-
-function adb() {
-    local pid
-    pid=$(pgrep -o adb)
-    if [ $? -eq 0 ]; then
-        /proc/$pid/exe "$@"
-    else
-        command adb "$@"
-    fi
 }
 
 function rebuild-ycm () {
