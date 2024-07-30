@@ -103,12 +103,6 @@ alias feh="feh --scale-down --auto-zoom"
 
 unalias gb
 
-alias ccode="cd $CODE"
-alias caosp="cd $CODE/android/aosp-main"
-alias cm="cd $CODE/android/main"
-alias cas="caosp && sb"
-alias cms="cm && sb"
-
 # Remove autocompletion of users
 unsetopt cdablevars
 unsetopt auto_name_dirs
@@ -253,11 +247,17 @@ function setup_tree_env_vars() {
     fi
 
     for i in $(ls $ANDROID_TREE_LOCATION); do
-        export $i:u:gs/-/_/=$ANDROID_TREE_LOCATION/$i
+        export _${i:u:gs/-/_/}=$ANDROID_TREE_LOCATION/$i
     done
 }
 
 setup_tree_env_vars
+
+alias ccode="cd $CODE"
+alias caosp="cd $_AOSP_MAIN"
+alias cm="cd $_MAIN"
+alias cas="caosp && sb"
+alias cms="cm && sb"
 
 function trace() {
     do_from_base ./external/chromium-trace/systrace.py \
@@ -288,6 +288,5 @@ function rebuild-ycm () {
     fi
     popd
 }
-
 
 alias scrot='scrot ~/Pictures/screenshots/screenshot_%y-%m-%d-%T.png'
