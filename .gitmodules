@@ -24,7 +24,7 @@
 
 [submodule "oh-my-zsh"]
     path = oh-my-zsh
-    url = git://github.com/robbyrussell/oh-my-zsh.git
+    url = https://github.com/robbyrussell/oh-my-zsh.git
 
 [submodule "rails"]
     path = vim/bundle/vim-rails
@@ -62,10 +62,10 @@
 	url = https://github.com/vim-scripts/VimClojure.git
 [submodule "vim/bundle/vim-slime"]
 	path = vim/bundle/vim-slime
-	url = git://github.com/jpalardy/vim-slime.git
+	url = https://github.com/jpalardy/vim-slime.git
 [submodule "vim/bundle/vim-gitgutter"]
 	path = vim/bundle/vim-gitgutter
-	url = git://github.com/airblade/vim-gitgutter.git
+	url = https://github.com/airblade/vim-gitgutter.git
 [submodule "vim/bundle/rust.vim"]
 	path = vim/bundle/rust.vim
 	url = https://github.com/rust-lang/rust.vim.git
