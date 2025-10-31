@@ -23,11 +23,32 @@ if [[ -e /etc/zsh_command_not_found ]]; then
   plugins+=(command-not-found)
 fi
 
-source $ZSH/oh-my-zsh.sh
+# Set whether we're on a WSL system
+type "wslinfo" > /dev/null 2>&1 && wsl=true || wsl=false
 
-# Customize to your needs...
-
+# ... and the general OS
 os=$(uname)
+
+# Setup the git alias before sourcing ZSH
+if $wsl; then
+	function git() {
+		if $(pwd -P | grep -q "^/mnt/c/*"); then
+			git.exe "$@"
+		else
+
+			command git "$@"
+		fi
+	}
+fi
+
+
+if [ -f $ZSH/oh-my-zsh.sh ]; then
+  if $wsl; then
+	  export ZSH_DISABLE_COMPFIX=true
+  fi
+  source $ZSH/oh-my-zsh.sh
+fi
+
 
 export CODE=/usr/local/code
 
@@ -55,6 +76,10 @@ elif [ $os = "Linux" ]; then
 
   export PATH=~/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/cuda/bin:~/Android/Sdk/tools:~/Android/Sdk/platform-tools:~/.local/bin:~/.cabal/bin:~/android-ndk/:~/code/third_party/depot_tools:~/.cargo/bin
 
+  if [ -f /mnt/c/Program\ Files/Git/cmd/git.exe ]; then
+    export PATH="$PATH:/mnt/c/Program Files/Git/cmd/"
+  fi
+
   # Rebind capslock to escape
   if [ -f $HOME/.xmodmap ]; then
       /usr/bin/xmodmap $HOME/.xmodmap 2&> /dev/null
@@ -67,6 +92,9 @@ elif [ $os = "Linux" ]; then
   export EDITOR=vim
 
   export LANG=en_US.utf8
+  export LC_CTYPE=en_US.UTF-8
+  export LC_ALL=en_US.UTF-8
+
 
   if [ -n "$DISPLAY" ]; then
     export BROWSER=chromium
@@ -100,8 +128,6 @@ alias gcc="gcc -std=c99 -Wall "
 alias popd="popd -q"
 
 alias feh="feh --scale-down --auto-zoom"
-
-unalias gb
 
 # Remove autocompletion of users
 unsetopt cdablevars
@@ -290,3 +316,4 @@ function rebuild-ycm () {
 }
 
 alias scrot='scrot ~/Pictures/screenshots/screenshot_%y-%m-%d-%T.png'
+
