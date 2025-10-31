@@ -102,6 +102,11 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+# source git prompts if on Arch
+if [ -f /usr/share/git/completion/git-prompt.sh ]; then
+    . /usr/share/git/completion/git-prompt.sh
+fi
+
 # Some alias shortcuts for my code dirs
 alias ccode='cd ~/code/'
 alias cpersonal='cd ~/code/personal'
@@ -128,6 +133,3 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-export CCACHE_DIR=/usr/local/google/src/ccache/
-export USE_CCACHE=1
-. "$HOME/.cargo/env"
