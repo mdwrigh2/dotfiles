@@ -10,5 +10,18 @@ Cargo:
     git-delta
     zoxide
 
-Other:
+Package Manager:
+    ctags
     fzf
+    neovim
+    rustup
+    uv
+    zsh
+
+Basic (Arch):
+    clang
+    git
+    less
+    python
+    sudo
+    which
