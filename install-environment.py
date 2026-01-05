@@ -66,6 +66,7 @@ DOTFILE_MAP = {
     "vimrc": ".vimrc",
     "vim": ".vim",
 
+    "alacritty.toml": ".alacritty.toml",
     "fonts.conf": ".fonts.conf",
     "inputrc": ".inputrc",
     "Xdefaults": ".Xdefaults",
