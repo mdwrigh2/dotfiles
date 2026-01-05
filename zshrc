@@ -180,7 +180,11 @@ function logcat {
 }
 
 function dumpsys {
-    adb shell dumpsys $*
+    if command -v bat &> /dev/null; then
+        adb shell dumpsys "$*" | bat --language=log
+    else
+        adb shell dumpsys "$*"
+    fi
 }
 
 function logtee {
@@ -249,6 +253,14 @@ function ssh() {
     echo -e '\e[?1002;1005l'
 }
 
+# Setup NVM
+if [ -d "$HOME/.nvm" ]; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # Enable bash completion
+fi
+
+
 # ru [FLAGS] [LDAPS...]
 function ru() {
   cmd="repo upload --cbr -o l=Presubmit-Ready+1 "
@@ -306,12 +318,10 @@ function monitor() {
 }
 
 function rebuild-ycm () {
-    pushd $ANDROID_BUILD_TOP
-    if ! make nothing || ! make -j50 SOONG_GEN_COMPDB=1 SOONG_GEN_COMPDB_DEBUG=1 SOONG_LINK_COMPDB_TO=$ANDROID_BUILD_TOP nothing
+    if ! m nothing || ! m SOONG_GEN_COMPDB=1 SOONG_GEN_COMPDB_DEBUG=1 SOONG_LINK_COMPDB_TO=$ANDROID_BUILD_TOP nothing
     then
         echo "Failed to generate compiler_commands.json file!"
     fi
-    popd
 }
 
 alias scrot='scrot ~/Pictures/screenshots/screenshot_%y-%m-%d-%T.png'
