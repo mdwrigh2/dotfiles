@@ -1,9 +1,9 @@
 [user]
     name = Michael Wright
-    email = terminallyalive@gmail.com
+    email = m@mdw.dev
 
 [core]
-    editor = vim
+    editor = nvim
     excludesfile = ~/.gitignore
     pager = delta
 
