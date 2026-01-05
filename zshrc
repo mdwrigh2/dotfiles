@@ -31,20 +31,19 @@ os=$(uname)
 
 # Setup the git alias before sourcing ZSH
 if $wsl; then
-	function git() {
-		if $(pwd -P | grep -q "^/mnt/c/*"); then
-			git.exe "$@"
-		else
-
-			command git "$@"
-		fi
-	}
+    function git() {
+        if $(pwd -P | grep -q "^/mnt/c/*"); then
+            git.exe "$@"
+        else
+            command git "$@"
+        fi
+    }
 fi
 
 
 if [ -f $ZSH/oh-my-zsh.sh ]; then
   if $wsl; then
-	  export ZSH_DISABLE_COMPFIX=true
+      export ZSH_DISABLE_COMPFIX=true
   fi
   source $ZSH/oh-my-zsh.sh
 fi

@@ -56,6 +56,7 @@ HOME_DIR = Path.home()
 DOTFILE_MAP = {
     "bashrc": ".bashrc",
     "zshrc": ".zshrc",
+    "oh-my-zsh": ".oh-my-zsh",
 
     "gitconfig": ".gitconfig",
     "irssi": ".irssi",
