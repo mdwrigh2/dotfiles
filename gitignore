@@ -19,3 +19,4 @@ Thumbs.db
 *.toc
 *.synctex.gz
 .vscode/
+.claude/
