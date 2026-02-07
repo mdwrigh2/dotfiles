@@ -26,8 +26,13 @@ endif
 " Keep temporary files and backup files in one dir rather than cluttering
 " source dirs.
 set backup
-set backupdir=~/.vim/backup
-set directory=~/.vim/tmp
+if has('win32')
+  set backupdir=~/vimfiles/backup
+  set directory=~/vimfiles/tmp
+else
+  set backupdir=~/.vim/backup
+  set directory=~/.vim/tmp
+endif
 
 " Keep at least 5 lines around whever I'm scrolling
 "set scrolloff=5

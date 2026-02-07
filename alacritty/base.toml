@@ -2,6 +2,10 @@
 blur = true
 opacity = 0.9
 
+[window.dimensions]
+columns = 100
+lines = 25
+
 [keyboard]
 bindings = [
    { key = "N", mods = "Control|Shift", action = "SpawnNewInstance" }
@@ -10,11 +14,6 @@ bindings = [
 [[hints.enabled]]
 regex = "[^ ]+\\.(rs|java|xml|h|cpp|cc|kt|c|bp|mk|py|toml):\\d+:\\d+"
 command = { program = "code", args = [ "--goto" ] }
-mouse = { enabled = true }
-
-[[hints.enabled]]
-regex = "(mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+" 
-command = { program = "xdg-open" }
 mouse = { enabled = true }
 
 [colors.primary]
