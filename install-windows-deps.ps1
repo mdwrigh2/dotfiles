@@ -11,6 +11,19 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Continue"
 
+# --- Check for Developer Mode ---
+$devModeKey = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock"
+$devModeEnabled = (Get-ItemProperty -Path $devModeKey -Name AllowDevelopmentWithoutDevLicense -ErrorAction SilentlyContinue).AllowDevelopmentWithoutDevLicense -eq 1
+
+if (-not $devModeEnabled) {
+    Write-Host "ERROR: Developer Mode is not enabled." -ForegroundColor Red
+    Write-Host "Developer Mode is required to create symlinks without exceeding path limits." -ForegroundColor Red
+    Write-Host "Enable it in: Settings > Privacy & Security > For developers > Developer Mode" -ForegroundColor Yellow
+    exit 1
+}
+
+Write-Host "Developer Mode is enabled." -ForegroundColor Green
+
 # --- winget packages ---
 # Python and uv are installed first since install-environment.py needs them.
 $wingetPackages = @(
