@@ -35,6 +35,20 @@ if (Get-Module -ListAvailable -Name PSReadLine) {
     Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
     Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
     Set-PSReadLineKeyHandler -Chord 'Ctrl+w' -Function BackwardKillWord
+
+    # Word navigation (Ctrl+Arrow / Alt+Arrow)
+    Set-PSReadLineKeyHandler -Chord 'Ctrl+LeftArrow' -Function BackwardWord
+    Set-PSReadLineKeyHandler -Chord 'Ctrl+RightArrow' -Function ForwardWord
+    Set-PSReadLineKeyHandler -Chord 'Alt+LeftArrow' -Function BackwardWord
+    Set-PSReadLineKeyHandler -Chord 'Alt+RightArrow' -Function ForwardWord
+
+    # Word deletion
+    Set-PSReadLineKeyHandler -Chord 'Alt+Backspace' -Function BackwardKillWord
+    Set-PSReadLineKeyHandler -Chord 'Alt+d' -Function KillWord
+
+    # Line navigation
+    Set-PSReadLineKeyHandler -Chord 'Ctrl+a' -Function BeginningOfLine
+    Set-PSReadLineKeyHandler -Chord 'Ctrl+e' -Function EndOfLine
 }
 
 # --- fzf integration ---
