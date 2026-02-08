@@ -7,7 +7,12 @@ normal = { family = "Inconsolata Nerd Font" }
 size = 12
 
 [terminal.shell]
-program = "pwsh"
+program = "pwsh.exe"
+
+[keyboard]
+bindings = [
+   { key = "Return", mods = "Shift", chars = "\u001b\r" },
+]
 
 [[hints.enabled]]
 regex = "(mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
