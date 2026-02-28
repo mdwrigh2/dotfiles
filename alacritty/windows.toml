@@ -11,9 +11,12 @@ program = "pwsh.exe"
 
 [keyboard]
 bindings = [
+    # Only use Ctrl+C for copy when text is selected; otherwise pass through
    { key = "Return", mods = "Shift", chars = "\u001b\r" },
 ]
 
 [[hints.enabled]]
-regex = "(mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+mouse.enabled = true
+hyperlinks = true
 command = { program = "cmd", args = ["/C", "start", ""] }

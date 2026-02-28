@@ -73,3 +73,6 @@ if (Get-Module -ListAvailable -Name posh-git) {
 if (Get-Module -ListAvailable -Name Terminal-Icons) {
     Import-Module Terminal-Icons
 }
+
+# Enable completions for vkt
+vkt completions powershell | Out-String | Invoke-Expression

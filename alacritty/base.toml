@@ -3,8 +3,8 @@ blur = true
 opacity = 0.9
 
 [window.dimensions]
-columns = 100
-lines = 25
+columns = 120
+lines = 35
 
 [keyboard]
 bindings = [
