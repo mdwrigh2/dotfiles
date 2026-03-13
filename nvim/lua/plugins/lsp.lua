@@ -53,7 +53,6 @@ return {
           map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
           map('<leader>rn', vim.lsp.buf.rename, 'Rename')
           map('<leader>D', vim.lsp.buf.type_definition, 'Type definition')
-          map('<leader>f', function() vim.lsp.buf.format({ async = true }) end, 'Format')
           map('[d', function() vim.diagnostic.jump({ count = -1 }) end, 'Previous diagnostic')
           map(']d', function() vim.diagnostic.jump({ count = 1 }) end, 'Next diagnostic')
           map('<leader>d', vim.diagnostic.open_float, 'Line diagnostics')
