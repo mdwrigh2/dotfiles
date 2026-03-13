@@ -23,7 +23,8 @@ return {
       'williamboman/mason.nvim',
     },
     opts = {
-      ensure_installed = servers,
+      -- jdtls is installed by mason but managed by nvim-jdtls, not nvim-lspconfig
+      ensure_installed = vim.list_extend({ 'jdtls' }, servers),
     },
   },
   {
@@ -53,8 +54,8 @@ return {
           map('<leader>rn', vim.lsp.buf.rename, 'Rename')
           map('<leader>D', vim.lsp.buf.type_definition, 'Type definition')
           map('<leader>f', function() vim.lsp.buf.format({ async = true }) end, 'Format')
-          map('[d', vim.diagnostic.goto_prev, 'Previous diagnostic')
-          map(']d', vim.diagnostic.goto_next, 'Next diagnostic')
+          map('[d', function() vim.diagnostic.jump({ count = -1 }) end, 'Previous diagnostic')
+          map(']d', function() vim.diagnostic.jump({ count = 1 }) end, 'Next diagnostic')
           map('<leader>d', vim.diagnostic.open_float, 'Line diagnostics')
         end,
       })
