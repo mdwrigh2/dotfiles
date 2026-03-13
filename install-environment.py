@@ -65,7 +65,7 @@ UNIX_MAP = {
     "oh-my-zsh": ".oh-my-zsh",
     "irssi": ".irssi",
     "xmonad": ".xmonad",
-    "nvim.vim": ".config/nvim/init.vim",
+    "nvim": ".config/nvim",
     "vimrc": ".vimrc",
     "vim": ".vim",
     "alacritty/base.toml": ".config/alacritty/base.toml",
@@ -79,7 +79,7 @@ UNIX_MAP = {
 WINDOWS_MAP = {
     "vimrc": "_vimrc",
     "vim": "vimfiles",
-    "nvim.vim": "AppData/Local/nvim/init.vim",
+    "nvim": "AppData/Local/nvim",
     "alacritty/base.toml": "AppData/Roaming/alacritty/base.toml",
     "alacritty/windows.toml": "AppData/Roaming/alacritty/alacritty.toml",
 }
