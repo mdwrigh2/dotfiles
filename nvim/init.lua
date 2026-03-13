@@ -12,3 +12,5 @@ else
   vim.opt.packpath = vim.opt.runtimepath:get()
   vim.cmd('source ~/.vimrc')
 end
+
+require("keymaps")

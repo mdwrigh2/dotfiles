@@ -16,6 +16,7 @@ end
 -- Editing behavior
 vim.opt.number = true
 vim.opt.confirm = true
+vim.opt.clipboard = 'unnamedplus'
 
 -- Search
 vim.opt.ignorecase = true
