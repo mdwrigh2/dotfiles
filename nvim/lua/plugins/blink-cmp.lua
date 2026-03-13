@@ -11,6 +11,8 @@ return {
       ['<C-e>'] = { 'cancel' },
       ['<C-n>'] = { 'select_next', 'fallback' },
       ['<C-p>'] = { 'select_prev', 'fallback' },
+      ['<C-j>'] = { 'select_next', 'fallback' },
+      ['<C-k>'] = { 'select_prev', 'fallback' },
       ['<C-d>'] = { 'scroll_documentation_down' },
       ['<C-u>'] = { 'scroll_documentation_up' },
     },
