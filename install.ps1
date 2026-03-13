@@ -2,10 +2,12 @@
 <#
 .SYNOPSIS
     Bootstrap script for a fresh Windows machine.
-    Installs development tools via winget and PowerShell modules.
+    Installs development tools via winget and PowerShell modules,
+    then links dotfiles via install-environment.py.
 .DESCRIPTION
     Run this script in an elevated PowerShell session on a fresh Windows install.
-    It will install CLI tools via winget and PowerShell modules from the Gallery.
+    It will install CLI tools via winget, PowerShell modules from the Gallery,
+    and then run install-environment.py to symlink dotfiles.
 #>
 
 Set-StrictMode -Version Latest
@@ -102,6 +104,29 @@ foreach ($mod in $psModules) {
     }
 }
 
+# --- Refresh PATH so newly installed tools are available ---
+Write-Host "`n=== Refreshing PATH ===" -ForegroundColor Cyan
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+Write-Host "PATH refreshed." -ForegroundColor Green
+
+# --- Link dotfiles ---
+Write-Host "`n=== Linking dotfiles ===" -ForegroundColor Cyan
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$installScript = Join-Path $scriptDir "install-environment.py"
+
+if (Get-Command uv -ErrorAction SilentlyContinue) {
+    Write-Host "Running install-environment.py..." -ForegroundColor Yellow
+    uv run $installScript --force
+    if ($LASTEXITCODE -eq 0) {
+        Write-Host "Dotfiles linked successfully." -ForegroundColor Green
+    } else {
+        Write-Host "install-environment.py failed (exit code $LASTEXITCODE)." -ForegroundColor Red
+    }
+} else {
+    Write-Host "WARNING: uv not found in PATH. Skipping dotfile linking." -ForegroundColor Yellow
+    Write-Host "Run manually after restarting your terminal: uv run install-environment.py --force" -ForegroundColor Yellow
+}
+
 # --- Summary ---
 Write-Host "`n=== Summary ===" -ForegroundColor Cyan
 
@@ -121,5 +146,4 @@ if ($moduleFailed.Count -gt 0) {
     Write-Host "  Failed: $($moduleFailed -join ', ')" -ForegroundColor Red
 }
 
-Write-Host "`nDone! Restart your terminal to pick up PATH changes." -ForegroundColor Green
-Write-Host "Then run: uv run install-environment.py" -ForegroundColor Yellow
+Write-Host "`nDone!" -ForegroundColor Green
