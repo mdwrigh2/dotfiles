@@ -11,6 +11,8 @@ return {
   },
   opts = {
     formatters_by_ft = {
+      c = { 'clang-format' },
+      cpp = { 'clang-format' },
       css = { 'prettier' },
       go = { 'goimports' },
       html = { 'prettier' },
@@ -21,6 +23,7 @@ return {
       lua = { 'stylua' },
       markdown = { 'prettier' },
       rust = { 'rustfmt' },
+      sh = { 'shfmt' },
       typescript = { 'prettier' },
       yaml = { 'prettier' },
     },
