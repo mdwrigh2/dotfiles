@@ -8,3 +8,4 @@ vim/tmp/*
 xmonad/xmonad.errors
 xmonad/xmonad-x86_64-linux
 irssi/saved_colors
+nvim/lazy-lock.json
