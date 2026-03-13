@@ -1,3 +1,5 @@
+require("options")
+
 -- Set up runtimepath so Pathogen and bundles are available, then source vimrc
 if vim.fn.has('win32') == 1 then
   vim.opt.runtimepath:prepend('~/vimfiles')
