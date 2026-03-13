@@ -88,7 +88,7 @@ elif [ $os = "Linux" ]; then
   bindkey "^[[1;3C" forward-word
   bindkey "^[[1;3D" backward-word
 
-  export EDITOR=vim
+  export EDITOR=nvim
 
   export LANG=en_US.utf8
   export LC_CTYPE=en_US.UTF-8
