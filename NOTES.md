@@ -10,20 +10,23 @@ Cargo:
     eza
     fd-find
     git-delta
+    tree-sitter-cli
+    uv
     zoxide
 
 Package Manager:
-    ctags
+    clang
     fzf
     neovim
     rustup
-    uv
     zsh
 
 Basic (Arch):
-    clang
+    base-devel
     git
     less
+    man-db
+    openssh
     python
     sudo
     which
