@@ -1,3 +1,12 @@
+local servers = {
+  'bashls',
+  'clangd',
+  'gopls',
+  'lua_ls',
+  'pyright',
+  'rust_analyzer',
+}
+
 return {
   {
     'williamboman/mason.nvim',
@@ -9,13 +18,7 @@ return {
       'williamboman/mason.nvim',
     },
     opts = {
-      ensure_installed = {
-        'clangd',
-        'gopls',
-        'lua_ls',
-        'pyright',
-        'rust_analyzer',
-      },
+      ensure_installed = servers,
     },
   },
   {
@@ -45,7 +48,7 @@ return {
         end,
       })
 
-      vim.lsp.enable({ 'clangd', 'gopls', 'lua_ls', 'pyright', 'rust_analyzer' })
+      vim.lsp.enable(servers)
     end,
   },
 }
