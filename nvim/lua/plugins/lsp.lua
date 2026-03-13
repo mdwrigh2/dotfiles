@@ -28,6 +28,24 @@ return {
     },
   },
   {
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    dependencies = {
+      'williamboman/mason.nvim',
+    },
+    opts = {
+      ensure_installed = {
+        'clang-format',
+        'goimports',
+        'google-java-format',
+        'ktlint',
+        'prettier',
+        'shellcheck',
+        'shfmt',
+        'stylua',
+      },
+    },
+  },
+  {
     'neovim/nvim-lspconfig',
     dependencies = {
       'williamboman/mason-lspconfig.nvim',
