@@ -61,7 +61,16 @@ return {
             vim.keymap.set('n', keys, func, { buffer = args.buf, desc = desc })
           end
 
-          map('gd', vim.lsp.buf.definition, 'Go to definition')
+          local function goto_definition()
+            vim.lsp.buf.definition({
+              on_list = function(options)
+                vim.fn.setqflist({}, ' ', options)
+                vim.cmd.cfirst()
+              end,
+            })
+          end
+          map('gd', goto_definition, 'Go to definition')
+          map('<C-]>', goto_definition, 'Go to definition')
           map('gD', vim.lsp.buf.declaration, 'Go to declaration')
           map('gi', vim.lsp.buf.implementation, 'Go to implementation')
           map('gr', vim.lsp.buf.references, 'References')
