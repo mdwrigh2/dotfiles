@@ -2,8 +2,14 @@
 vim.g.mapleader = ','
 vim.g.maplocalleader = '\\'
 
--- Clear search highlighting
-vim.keymap.set('n', '<leader><space>', ':noh<cr>:call clearmatches()<cr>', { silent = true })
+-- Clear search highlighting, diagnostics overlay, and quickfix/location lists
+vim.keymap.set('n', '<leader><space>', function()
+  vim.cmd.nohlsearch()
+  vim.fn.clearmatches()
+  vim.diagnostic.config({ virtual_lines = false })
+  vim.cmd.cclose()
+  vim.cmd.lclose()
+end, { silent = true, desc = 'Clear' })
 
 -- H/L go to first/last non-blank character on the line
 vim.keymap.set('', 'H', '^')
@@ -36,7 +42,7 @@ vim.keymap.set('', 'j', 'gj')
 vim.keymap.set('', 'k', 'gk')
 
 -- Last buffer
-vim.keymap.set('n', '<leader>b', ':b#<CR>')
+vim.keymap.set('n', '<leader>b', ':b#<CR>', { desc = 'Last buffer' })
 
 -- Command typo fixes
 vim.api.nvim_create_user_command('Wq', 'wq', {})

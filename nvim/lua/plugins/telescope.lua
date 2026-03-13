@@ -9,7 +9,7 @@ return {
     { '<leader>m', '<cmd>Telescope buffers<cr>', desc = 'Buffers' },
     { '<leader>/', '<cmd>Telescope live_grep<cr>', desc = 'Live grep' },
     { '<leader>?', '<cmd>Telescope oldfiles<cr>', desc = 'Recent files' },
-    { '<leader>ds', '<cmd>Telescope lsp_document_symbols<cr>', desc = 'Document symbols' },
+    { '<leader>s', '<cmd>Telescope lsp_document_symbols<cr>', desc = 'Document symbols' },
     { '<leader>ws', '<cmd>Telescope lsp_workspace_symbols<cr>', desc = 'Workspace symbols' },
   },
   config = function()

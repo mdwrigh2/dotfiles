@@ -61,23 +61,27 @@ return {
             vim.keymap.set('n', keys, func, { buffer = args.buf, desc = desc })
           end
 
-          local function goto_definition()
+          map('gd', vim.lsp.buf.definition, 'Go to definition')
+          map('<C-]>', function()
             vim.lsp.buf.definition({
               on_list = function(options)
                 vim.fn.setqflist({}, ' ', options)
                 vim.cmd.cfirst()
               end,
             })
-          end
-          map('gd', goto_definition, 'Go to definition')
-          map('<C-]>', goto_definition, 'Go to definition')
+          end, 'Go to definition')
           map('gD', vim.lsp.buf.declaration, 'Go to declaration')
           map('gi', vim.lsp.buf.implementation, 'Go to implementation')
           map('gr', vim.lsp.buf.references, 'References')
           map('K', vim.lsp.buf.hover, 'Hover')
           map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
           map('<leader>rn', vim.lsp.buf.rename, 'Rename')
-          map('<leader>D', vim.lsp.buf.type_definition, 'Type definition')
+          map('gy', vim.lsp.buf.type_definition, 'Type definition')
+          map('<leader>D', function()
+            vim.diagnostic.config({
+              virtual_lines = not vim.diagnostic.config().virtual_lines,
+            })
+          end, 'Toggle virtual lines')
           map('[d', function() vim.diagnostic.jump({ count = -1 }) end, 'Previous diagnostic')
           map(']d', function() vim.diagnostic.jump({ count = 1 }) end, 'Next diagnostic')
           map('<leader>d', vim.diagnostic.open_float, 'Line diagnostics')
