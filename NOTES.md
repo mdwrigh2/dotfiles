@@ -14,11 +14,18 @@ Cargo:
     uv
     zoxide
 
+nvm (https://github.com/nvm-sh/nvm):
+    node (latest LTS)
+
 Package Manager:
     clang
+    curl
     fzf
+    go
+    gzip
     neovim
     rustup
+    unzip
     zsh
 
 Basic (Arch):
@@ -29,6 +36,7 @@ Basic (Arch):
     openssh
     python
     sudo
+    tar
     which
 
 ## Windows
