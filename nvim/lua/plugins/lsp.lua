@@ -51,13 +51,11 @@ return {
       'williamboman/mason-lspconfig.nvim',
     },
     config = function()
-      -- LSP keymaps and completion on attach
+      -- LSP keymaps on attach
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if not client then return end
-
-          vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
 
           local map = function(keys, func, desc)
             vim.keymap.set('n', keys, func, { buffer = args.buf, desc = desc })
