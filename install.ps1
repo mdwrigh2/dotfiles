@@ -42,7 +42,14 @@ $wingetPackages = @(
     "junegunn.fzf"
     "BurntSushi.ripgrep.MSVC"
     "Alacritty.Alacritty"
+    "Google.Protobuf"
     "Rustlang.Rustup"
+    "Oracle.JDK.21"
+    "LLVM.LLVM"
+    "GoLang.Go"
+    "Microsoft.VisualStudioCode"
+    "Microsoft.WindowsTerminal"
+    "7zip.7zip"
 )
 
 # --- PowerShell modules ---
