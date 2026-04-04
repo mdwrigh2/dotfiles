@@ -84,6 +84,7 @@ WINDOWS_MAP = {
     "alacritty/windows.toml": "AppData/Roaming/alacritty/alacritty.toml",
     "claude/hooks": ".claude/hooks",
     "claude/settings.json": ".claude/settings.json",
+    "claude/CLAUDE.md": ".claude/CLAUDE.md",
 }
 
 # --- END CONFIGURATION ---
