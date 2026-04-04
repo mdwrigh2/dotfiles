@@ -82,6 +82,8 @@ WINDOWS_MAP = {
     "nvim": "AppData/Local/nvim",
     "alacritty/base.toml": "AppData/Roaming/alacritty/base.toml",
     "alacritty/windows.toml": "AppData/Roaming/alacritty/alacritty.toml",
+    "claude/hooks": ".claude/hooks",
+    "claude/settings.json": ".claude/settings.json",
 }
 
 # --- END CONFIGURATION ---
