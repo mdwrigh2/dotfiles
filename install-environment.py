@@ -74,6 +74,9 @@ UNIX_MAP = {
     "inputrc": ".inputrc",
     "Xdefaults": ".Xdefaults",
     "xmodmap": ".xmodmap",
+    "claude/hooks": ".claude/hooks",
+    "claude/settings.json": ".claude/settings.json",
+    "claude/CLAUDE.md": ".claude/CLAUDE.md",
 }
 
 WINDOWS_MAP = {
