@@ -2,7 +2,12 @@ return {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      build = vim.fn.has('win32') == 1
+        and 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
+        or 'make',
+    },
   },
   keys = {
     { '<leader>o', '<cmd>Telescope find_files<cr>', desc = 'Find files' },

@@ -47,6 +47,8 @@ $wingetPackages = @(
     "Oracle.JDK.21"
     "LLVM.LLVM"
     "GoLang.Go"
+    "OpenJS.NodeJS.LTS"
+    "Kitware.CMake"
     "Microsoft.VisualStudioCode"
     "Microsoft.WindowsTerminal"
     "7zip.7zip"
@@ -115,6 +117,26 @@ foreach ($mod in $psModules) {
 Write-Host "`n=== Refreshing PATH ===" -ForegroundColor Cyan
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 Write-Host "PATH refreshed." -ForegroundColor Green
+
+# --- Rust toolchain and cargo packages ---
+Write-Host "`n=== Setting up Rust toolchain ===" -ForegroundColor Cyan
+
+if (Get-Command rustup -ErrorAction SilentlyContinue) {
+    Write-Host "Installing stable toolchain..." -ForegroundColor Yellow
+    rustup default stable
+
+    $cargoPackages = @(
+        "tree-sitter-cli"
+    )
+
+    foreach ($pkg in $cargoPackages) {
+        Write-Host "Installing $pkg..." -ForegroundColor Yellow
+        cargo install $pkg
+    }
+} else {
+    Write-Host "WARNING: rustup not found in PATH. Skipping Rust toolchain setup." -ForegroundColor Yellow
+    Write-Host "Restart your terminal and run: rustup default stable && cargo install tree-sitter-cli" -ForegroundColor Yellow
+}
 
 # --- Link dotfiles ---
 Write-Host "`n=== Linking dotfiles ===" -ForegroundColor Cyan
